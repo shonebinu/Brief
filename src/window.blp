@@ -1,0 +1,101 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $BriefWindow: Adw.ApplicationWindow {
+  title: _("Brief");
+  default-width: 1125;
+  default-height: 750;
+
+  Adw.Breakpoint {
+    condition ("max-width: 600sp")
+
+    setters {
+      split_view.collapsed: true;
+    }
+  }
+
+  content: Adw.NavigationSplitView split_view {
+    sidebar: Adw.NavigationPage {
+      title: _("Brief");
+      tag: "sidebar";
+
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          [end]
+          MenuButton {
+            primary: true;
+            icon-name: "open-menu-symbolic";
+            menu-model: primary_menu;
+          }
+        }
+
+        content: Box {
+          orientation: vertical;
+          width-request: 325;
+
+          SearchEntry search_entry {
+            placeholder-text: _("Search commands...");
+            margin-bottom: 6;
+            margin-start: 6;
+            margin-end: 6;
+          }
+
+          ScrolledWindow {
+            vexpand: true;
+            hscrollbar-policy: never;
+
+            ListView results_list_view {
+              styles [
+                "navigation-sidebar",
+              ]
+            }
+          }
+        };
+      };
+    };
+
+    content: Adw.NavigationPage navigation_page {
+      title: _("Welcome");
+      tag: "content";
+
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {}
+
+        content: Stack content_stack {
+          transition-type: crossfade;
+
+          Adw.StatusPage status_page {
+            icon-name: "system-search-symbolic";
+            title: "Search Brief";
+            description: "Try searching for commands like <span font_family='Monospace'>ls</span> or <span font_family='Monospace'>cd</span>";
+
+            styles [
+              "compact",
+            ]
+          }
+        };
+      };
+    };
+  };
+}
+
+menu primary_menu {
+  section {
+    item {
+      label: _("_Preferences");
+      action: "app.preferences";
+    }
+
+    item {
+      label: _("_Keyboard Shortcuts");
+      action: "app.shortcuts";
+    }
+
+    item {
+      label: _("_About Brief");
+      action: "app.about";
+    }
+  }
+}

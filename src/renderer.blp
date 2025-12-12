@@ -1,0 +1,24 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CommandPage: Adw.Bin {
+  child: Adw.ToastOverlay overlay {
+    child: ScrolledWindow scroller {
+      vexpand: true;
+      hexpand: true;
+
+      child: Adw.Clamp {
+        maximum-size: 800;
+        margin-top: 24;
+        margin-bottom: 24;
+        margin-start: 12;
+        margin-end: 12;
+
+        child: Box content_box {
+          orientation: vertical;
+          spacing: 12;
+        };
+      };
+    };
+  };
+}

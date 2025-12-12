@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/shonebinu/Brief">
+    <file preprocess="xml-stripblanks">window.ui</file>
+    <file preprocess="xml-stripblanks">renderer.ui</file>
+    <file preprocess="xml-stripblanks">shortcuts-dialog.ui</file>
+    <file preprocess="xml-stripblanks">preferences.ui</file>
+  </gresource>
+</gresources>

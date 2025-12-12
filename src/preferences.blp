@@ -1,0 +1,33 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $BriefPreferencesWindow: Adw.PreferencesDialog {
+  title: _("Preferences");
+  search-enabled: false;
+  content-width: 600;
+  content-height: 500;
+
+  Adw.PreferencesPage {
+    icon-name: "preferences-system-symbolic";
+    title: _("General");
+
+    Adw.PreferencesGroup {
+      title: _("Content");
+
+      Adw.ExpanderRow platform_group {
+        title: _("Platforms");
+        subtitle: _("Select operating systems");
+      }
+
+      Adw.ExpanderRow language_group {
+        title: _("Languages");
+        subtitle: _("Select languages");
+      }
+
+      Adw.ComboRow format_row {
+        title: _("Command Format");
+        subtitle: _("Display style for arguments");
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="brief">
+	<schema id="com.shonebinu.Brief" path="/com/shonebinu/Brief/">
+		<key name="platforms" type="as">
+			<default>['common', 'linux']</default>
+			<summary>Active Platforms</summary>
+			<description>List of enabled operating systems.</description>
+		</key>
+
+		<key name="languages" type="as">
+			<default>['en']</default>
+			<summary>Active Languages</summary>
+			<description>List of enabled language codes.</description>
+		</key>
+
+		<key name="format" type="s">
+			<default>'long'</default>
+			<summary>Command Format</summary>
+			<description>Long or short command arguments.</description>
+		</key>
+	</schema>
+</schemalist>
