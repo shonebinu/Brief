@@ -6,7 +6,7 @@ A description of this project.
 
 - common platform in preferences shuld hav label... common across many
 - how to get widget completions in vscode??? tooling
-- wraping cmd seems not working... link should be clickable in renderer
+- wraping cmd seems not working...
 - update cache btn (in menu)
 - first command seem selected on startup...
 - upon search , list scrollbar should reset

@@ -42,13 +42,21 @@ class CommandPage(Adw.Bin):
                 )
 
             elif line.startswith("> "):
+                text_content = line[2:]
+
+                text_content = re.sub(
+                    r"`([^`]+)`",
+                    r'<span font="monospace">\1</span>',
+                    text_content,
+                )
+
+                text_content = re.sub(
+                    r"<(https?://[^>]+)>", r'<a href="\1">\1</a>', text_content
+                )
+
                 self.content_box.append(
                     Gtk.Label(
-                        label=re.sub(
-                            r"`([^`]+)`",
-                            r'<span font="monospace">\1</span>',
-                            line[2:],
-                        ),
+                        label=text_content,
                         xalign=0,
                         wrap=True,
                         css_classes=["dim-label"],
