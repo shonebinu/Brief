@@ -81,24 +81,38 @@ class CommandPage(Adw.Bin):
                 )
 
     def _create_code_block(self, code_text, cmd_arg_format):
-        row = Adw.ActionRow()
-        row.set_activatable(False)
-        row.add_css_class("property")
+        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, css_classes=["card"])
 
-        label = Gtk.Label(label=code_text, xalign=0, selectable=True, wrap=True)
-        label.add_css_class("monospace")
-        label.set_ellipsize(Pango.EllipsizeMode.NONE)
-        row.add_prefix(label)
+        scrolled = Gtk.ScrolledWindow(hexpand=True)
 
-        btn = Gtk.Button(icon_name="edit-copy-symbolic")
-        btn.add_css_class("flat")
-        btn.set_tooltip_text("Copy to clipboard")
-        btn.set_valign(Gtk.Align.CENTER)
+        scrolled.set_child(
+            Gtk.Label(
+                label=code_text,
+                xalign=0,
+                selectable=True,
+                wrap=False,
+                css_classes=["monospace"],
+                margin_top=18,
+                margin_bottom=18,
+                margin_start=18,
+                margin_end=18,
+            )
+        )
+
+        btn = Gtk.Button(
+            icon_name="edit-copy-symbolic",
+            tooltip_text="Copy to clipboard",
+            valign=Gtk.Align.CENTER,
+            css_classes=["flat"],
+            margin_end=6,
+        )
 
         btn.connect("clicked", lambda b: self._copy_to_clipboard(code_text))
 
-        row.add_suffix(btn)
-        return row
+        box.append(scrolled)
+        box.append(btn)
+
+        return box
 
     def _copy_to_clipboard(self, text):
         clipboard = Gdk.Display.get_default().get_clipboard()

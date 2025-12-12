@@ -6,7 +6,8 @@ A description of this project.
 
 - common platform in preferences shuld hav label... common across many
 - how to get widget completions in vscode??? tooling
-- wraping cmd seems not working...
+- long | short cmd arg option
+- check to see if changing preferences change the list, change long | short instantly
 - update cache btn (in menu)
 - first command seem selected on startup...
 - upon search , list scrollbar should reset
