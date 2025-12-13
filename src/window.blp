@@ -49,6 +49,10 @@ template $BriefWindow: Adw.ApplicationWindow {
               styles [
                 "navigation-sidebar",
               ]
+
+              single-click-activate: true;
+
+              factory: SignalListItemFactory item_factory {};
             }
           }
         };

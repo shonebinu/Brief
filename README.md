@@ -4,16 +4,15 @@ A description of this project.
 
 ## TODO
 
-- common platform in preferences shuld hav label... common across many
-- how to get widget completions in vscode??? tooling
-- long | short cmd arg option -- add color to args
+- separate list from window...
 - check to see if changing preferences change the list, change long | short instantly
 - update cache btn (in menu)
 - first command seem selected on startup...
 - upon search , list scrollbar should reset or not???
-- credit tldr
-- do something abt the shortcuts thing and about in menu
-- add color to args of commands or not
+- credit tldr (in about ??)
+- setup about and shortcuts in menu (legal stuff)
+- make temporary logo
+- ctrl f for search and enter for selecting 1st
 
 - icon https://blogs.gnome.org/tbernard/2019/12/30/designing-an-icon-for-your-app/ terminal-icon https://developer.gnome.org/hig/guidelines/app-icons.html
 
