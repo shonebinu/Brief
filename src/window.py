@@ -21,6 +21,7 @@ class BriefWindow(Adw.ApplicationWindow):
         super().__init__(**kwargs)
 
         self.manager = PageManager()
+        self.current_item = None
 
         self.sidebar = BriefSidebar(self.manager)
         self.sidebar.connect("command-activated", self.on_command_selected)
@@ -30,10 +31,14 @@ class BriefWindow(Adw.ApplicationWindow):
         self.command_view = CommandPage()
         self.content_stack.add_named(self.command_view, "content")
 
+        self.manager.settings.connect("changed", self.on_settings_changed)
+
     def on_command_selected(self, sidebar, item: CommandItem):
         self.load_command_page(item)
 
     def load_command_page(self, item: CommandItem):
+        self.current_item = item
+
         raw_text = self.manager.get_page(item.language, item.platform, item.name)
 
         if raw_text:
@@ -43,3 +48,7 @@ class BriefWindow(Adw.ApplicationWindow):
                 raw_text, self.manager.settings.get_string("format")
             )
             self.split_view.set_show_content(True)
+
+    def on_settings_changed(self, settings, key):
+        if self.current_item and self.split_view.get_show_content():
+            self.load_command_page(self.current_item)

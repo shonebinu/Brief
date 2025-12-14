@@ -29,7 +29,7 @@ class BriefApplication(Adw.Application):
 
     def on_about_action(self, *args):
         about = Adw.AboutDialog(
-            application_name="brief",
+            application_name="Brief",
             application_icon="io.github.shonebinu.Brief",
             developer_name="Shone Binu",
             version="0.1.0",
