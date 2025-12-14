@@ -124,6 +124,9 @@ class BriefSidebar(Adw.NavigationPage):
         self.filter.changed(Gtk.FilterChange.DIFFERENT)
         self.sorter.changed(Gtk.SorterChange.DIFFERENT)
 
+        if self.selection_model.get_n_items() > 0:
+            self.results_list_view.scroll_to(0, Gtk.ListScrollFlags.NONE, None)
+
     def on_search_activate(self, _entry):
         if self.selection_model.get_n_items() > 0:
             self.selection_model.set_selected(0)
