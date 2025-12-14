@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="brief">
-	<schema id="io.github.shonebinu.Brief" path="/com/shonebinu/Brief/">
+	<schema id="io.github.shonebinu.Brief" path="/io/github/shonebinu/Brief/">
 		<key name="platforms" type="as">
 			<default>['common', 'linux']</default>
 			<summary>Active Platforms</summary>

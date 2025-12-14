@@ -5,22 +5,30 @@
   <project_license>GPL-3.0-or-later</project_license>
 
   <name>Brief</name>
-  <summary>Keep the summary shorter, between 10 and 35 characters</summary>
+  <summary>A modern GUI for tldr pages</summary>
   <description>
-    <p>No description</p>
+    <p>Brief is a modern GTK4 application for browsing tldr-pages. It provides a clean, native
+      interface to view community-maintained help pages for command-line tools.</p>
+    <p>Features:</p>
+    <ul>
+      <li>Built with GTK4 and Libadwaita for a seamless GNOME experience.</li>
+      <li>Works offline with cached pages.</li>
+      <li>Filter platform-specific commands (Linux, Windows, Android, etc.).</li>
+      <li>Browse commands in multiple languages.</li>
+    </ul>
   </description>
 
-  <developer id="tld.vendor">
-    <name>Developer name</name>
+  <developer id="io.github.shonebinu">
+    <name>Shone Binu</name>
   </developer>
 
   <!-- Required: Should be a link to the upstream homepage for the component -->
-  <url type="homepage">https://example.org/</url>
+  <url type="homepage">https://github.com/shonebinu/Brief</url>
   <!-- Recommended: It is highly recommended for open-source projects to display the source code
   repository -->
-  <url type="vcs-browser">https://example.org/repository</url>
+  <url type="vcs-browser">https://github.com/shonebinu/Brief</url>
   <!-- Should point to the software's bug tracking system, for users to report new bugs -->
-  <url type="bugtracker">https://example.org/issues</url>
+  <url type="bugtracker">https://github.com/shonebinu/Brief/issues</url>
   <!-- Should link a FAQ page for this software, to answer some of the most-asked questions in
   detail -->
   <!-- URLs of this type should point to a webpage where users can submit or modify translations of

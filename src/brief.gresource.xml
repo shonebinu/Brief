@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/com/shonebinu/Brief">
+  <gresource prefix="/io/github/shonebinu/Brief">
     <file preprocess="xml-stripblanks">window.ui</file>
     <file preprocess="xml-stripblanks">sidebar.ui</file>
     <file preprocess="xml-stripblanks">renderer.ui</file>

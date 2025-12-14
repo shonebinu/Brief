@@ -51,7 +51,7 @@ class CommandListRow(Gtk.Box):
         self.lang_label.set_label(item.language)
 
 
-@Gtk.Template(resource_path="/com/shonebinu/Brief/sidebar.ui")
+@Gtk.Template(resource_path="/io/github/shonebinu/Brief/sidebar.ui")
 class BriefSidebar(Adw.NavigationPage):
     __gtype_name__ = "BriefSidebar"
 

@@ -6,7 +6,7 @@ from gi.repository import Adw, Gtk, Gio
 from .tldr import PageManager
 
 
-@Gtk.Template(resource_path="/com/shonebinu/Brief/preferences.ui")
+@Gtk.Template(resource_path="/io/github/shonebinu/Brief/preferences.ui")
 class BriefPreferencesWindow(Adw.PreferencesDialog):
     __gtype_name__ = "BriefPreferencesWindow"
 

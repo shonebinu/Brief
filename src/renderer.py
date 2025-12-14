@@ -7,7 +7,7 @@ gi.require_version("Adw", "1")
 from gi.repository import Gtk, Adw, Gdk
 
 
-@Gtk.Template(resource_path="/com/shonebinu/Brief/renderer.ui")
+@Gtk.Template(resource_path="/io/github/shonebinu/Brief/renderer.ui")
 class CommandPage(Adw.Bin):
     __gtype_name__ = "CommandPage"
 

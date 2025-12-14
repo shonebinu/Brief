@@ -9,7 +9,7 @@ from .renderer import CommandPage
 from .sidebar import BriefSidebar, CommandItem
 
 
-@Gtk.Template(resource_path="/com/shonebinu/Brief/window.ui")
+@Gtk.Template(resource_path="/io/github/shonebinu/Brief/window.ui")
 class BriefWindow(Adw.ApplicationWindow):
     __gtype_name__ = "BriefWindow"
 
