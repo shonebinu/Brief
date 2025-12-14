@@ -13,7 +13,7 @@ from .preferences import BriefPreferencesWindow
 class BriefApplication(Adw.Application):
     def __init__(self):
         super().__init__(
-            application_id="com.shonebinu.Brief",
+            application_id="io.github.shonebinu.Brief",
             flags=Gio.ApplicationFlags.DEFAULT_FLAGS,
             resource_base_path="/com/shonebinu/Brief",
         )
@@ -30,7 +30,7 @@ class BriefApplication(Adw.Application):
     def on_about_action(self, *args):
         about = Adw.AboutDialog(
             application_name="brief",
-            application_icon="com.shonebinu.Brief",
+            application_icon="io.github.shonebinu.Brief",
             developer_name="Shone Binu",
             version="0.1.0",
             developers=["Shone Binu"],

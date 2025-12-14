@@ -1,4 +1,4 @@
-application_id = 'com.shonebinu.Brief'
+application_id = 'io.github.shonebinu.Brief'
 
 scalable_dir = 'hicolor' / 'scalable' / 'apps'
 install_data(

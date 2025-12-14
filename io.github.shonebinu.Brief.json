@@ -1,5 +1,5 @@
 {
-  "id": "com.shonebinu.Brief",
+  "id": "io.github.shonebinu.Brief",
   "runtime": "org.gnome.Platform",
   "runtime-version": "master",
   "sdk": "org.gnome.Sdk",

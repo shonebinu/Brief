@@ -1,8 +1,8 @@
 # List of source files containing translatable strings.
 # Please keep this file sorted alphabetically.
-data/com.shonebinu.Brief.desktop.in
-data/com.shonebinu.Brief.metainfo.xml.in
-data/com.shonebinu.Brief.gschema.xml
+data/io.github.shonebinu.Brief.desktop.in
+data/io.github.shonebinu.Brief.metainfo.xml.in
+data/io.github.shonebinu.Brief.gschema.xml
 src/main.py
 src/window.py
 src/window.blp

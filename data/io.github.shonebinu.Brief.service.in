@@ -1,3 +1,3 @@
 [D-BUS Service]
-Name=com.shonebinu.Brief
+Name=io.github.shonebinu.Brief
 Exec=@bindir@/brief --gapplication-service

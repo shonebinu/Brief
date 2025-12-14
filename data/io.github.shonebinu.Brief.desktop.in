@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=brief
 Exec=brief
-Icon=com.shonebinu.Brief
+Icon=io.github.shonebinu.Brief
 Terminal=false
 Type=Application
 Categories=Utility;

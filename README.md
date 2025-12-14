@@ -1,4 +1,4 @@
-# brief
+# Brief
 
 A description of this project.
 
@@ -7,6 +7,7 @@ A description of this project.
 CHORE stuff
 
 - credit tldr (in about ??)
+- should the current page argument change when preference changed
 - setup about and shortcuts in menu (legal stuff)
 - ctrl f for search and enter for selecting 1st
 

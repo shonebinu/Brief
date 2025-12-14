@@ -17,7 +17,7 @@ class BriefPreferencesWindow(Adw.PreferencesDialog):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.settings = Gio.Settings.new("com.shonebinu.Brief")
+        self.settings = Gio.Settings.new("io.github.shonebinu.Brief")
         self.manager = PageManager()
 
         self.setup_expander(

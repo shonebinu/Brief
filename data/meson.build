@@ -1,6 +1,6 @@
 desktop_file = i18n.merge_file(
-        input: 'com.shonebinu.Brief.desktop.in',
-       output: 'com.shonebinu.Brief.desktop',
+        input: 'io.github.shonebinu.Brief.desktop.in',
+       output: 'io.github.shonebinu.Brief.desktop',
          type: 'desktop',
        po_dir: '../po',
       install: true,
@@ -13,8 +13,8 @@ if desktop_utils.found()
 endif
 
 appstream_file = i18n.merge_file(
-        input: 'com.shonebinu.Brief.metainfo.xml.in',
-       output: 'com.shonebinu.Brief.metainfo.xml',
+        input: 'io.github.shonebinu.Brief.metainfo.xml.in',
+       output: 'io.github.shonebinu.Brief.metainfo.xml',
        po_dir: '../po',
       install: true,
   install_dir: get_option('datadir') / 'metainfo'
@@ -24,7 +24,7 @@ appstreamcli = find_program('appstreamcli', required: false, disabler: true)
 test('Validate appstream file', appstreamcli,
      args: ['validate', '--no-net', '--explain', appstream_file])
 
-install_data('com.shonebinu.Brief.gschema.xml',
+install_data('io.github.shonebinu.Brief.gschema.xml',
   install_dir: get_option('datadir') / 'glib-2.0' / 'schemas'
 )
 
@@ -37,8 +37,8 @@ test('Validate schema file',
 service_conf = configuration_data()
 service_conf.set('bindir', get_option('prefix') / get_option('bindir'))
 configure_file(
-  input: 'com.shonebinu.Brief.service.in',
-  output: 'com.shonebinu.Brief.service',
+  input: 'io.github.shonebinu.Brief.service.in',
+  output: 'io.github.shonebinu.Brief.service',
   configuration: service_conf,
   install_dir: get_option('datadir') / 'dbus-1' / 'services'
 )

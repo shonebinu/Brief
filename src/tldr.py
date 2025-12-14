@@ -6,7 +6,7 @@ from gi.repository import Gio
 class PageManager:
     def __init__(self):
         self.system_path = "/app/share/tldr-data/"
-        self.settings = Gio.Settings.new("com.shonebinu.Brief")
+        self.settings = Gio.Settings.new("io.github.shonebinu.Brief")
 
     def get_available_languages(self):
         languages = []
