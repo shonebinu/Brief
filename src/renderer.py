@@ -4,7 +4,7 @@ import re
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
-from gi.repository import Gtk, Adw, Gdk, Pango
+from gi.repository import Gtk, Adw, Gdk
 
 
 @Gtk.Template(resource_path="/com/shonebinu/Brief/renderer.ui")
