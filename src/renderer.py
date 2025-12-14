@@ -93,7 +93,7 @@ class CommandPage(Adw.Bin):
                     parts = content[1:-1].split("|")
                     return parts[1] if fmt == "long" else parts[0]
 
-                return content.replace("[", "").replace("]", "")
+                return content
 
             return re.sub(r"\{\{(.*?)\}\}", replace, text)
 
