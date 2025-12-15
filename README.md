@@ -1,9 +1,9 @@
 # Brief
 
-Brief is a modern GTK4 application for browsing [tldr-pages](https://github.com/tldr-pages/tldr). It provides a clean, native interface to view community-maintained help pages for command-line tools.
+Brief is a GTK4 application for browsing [tldr-pages](https://github.com/tldr-pages/tldr). It provides a clean, native interface to view community-maintained help pages for command-line tools.
 
-<img width="2350" height="1600" alt="Brief app screenshot" src="https://github.com/user-attachments/assets/61579441-cdbf-47bf-9c3b-53c4181747ca" />
-<img width="2350" height="1600" alt="Brief app preferences menu screenshot" src="https://github.com/user-attachments/assets/f4a03606-c129-4307-b0bd-dd0b54792fd1" />
+![Brief app screenshot](./data/screenshots/brief.png)
+![Brief app preferences screenshot](./data/screenshots/brief.png)
 
 ## Features
 

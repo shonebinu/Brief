@@ -5,9 +5,9 @@
   <project_license>GPL-3.0-or-later</project_license>
 
   <name>Brief</name>
-  <summary>A modern GUI for tldr pages</summary>
+  <summary>A GUI for tldr pages</summary>
   <description>
-    <p>Brief is a modern GTK4 application for browsing tldr-pages. It provides a clean, native
+    <p>Brief is a GTK4 application for browsing tldr-pages. It provides a clean, native
       interface to view community-maintained help pages for command-line tools.</p>
     <p>Features:</p>
     <ul>
@@ -33,19 +33,19 @@
   detail -->
   <!-- URLs of this type should point to a webpage where users can submit or modify translations of
   the upstream project -->
-  <url type="translate">https://example.org/translate</url>
-  <url type="faq">https://example.org/faq</url>
+  <url type="translate">https://github.com/shonebinu/Brief</url>
+  <url type="faq">https://github.com/shonebinu/Brief</url>
   <!-- Should provide a web link to an online user's reference, a software manual or help page -->
-  <url type="help">https://example.org/help</url>
+  <url type="help">https://github.com/shonebinu/Brief</url>
   <!-- URLs of this type should point to a webpage showing information on how to donate to the
   described software project -->
-  <url type="donation">https://example.org/donate</url>
+  <url type="donation">https://shonebinu.com</url>
   <!-- This could for example be an HTTPS URL to an online form or a page describing how to contact
   the developer -->
-  <url type="contact">https://example.org/contact</url>
+  <url type="contact">https://shonebinu.com</url>
   <!-- URLs of this type should point to a webpage showing information on how to contribute to the
   described software project -->
-  <url type="contribute">https://example.org/contribute</url>
+  <url type="contribute">https://github.com/shonebinu/Brief</url>
 
   <translation type="gettext">brief</translation>
   <!-- All graphical applications having a desktop file must have this tag in the MetaInfo.
@@ -74,7 +74,7 @@
   </screenshots>
 
   <releases>
-    <release version="1.0.1" date="2024-01-18">
+    <release version="0.1.0" date="2024-01-18">
       <url type="details">https://example.org/changelog.html#version_1.0.1</url>
       <description translate="no">
         <p>Release description</p>
