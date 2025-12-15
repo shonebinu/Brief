@@ -64,23 +64,24 @@
 
   <screenshots>
     <screenshot type="default">
-      <image>https://example.org/example1.png</image>
-      <caption>A caption</caption>
+      <image>
+        https://raw.githubusercontent.com/shonebinu/Brief/refs/heads/main/data/screenshots/brief.png</image>
+      <caption>Brief app</caption>
     </screenshot>
     <screenshot>
-      <image>https://example.org/example2.png</image>
-      <caption>A caption</caption>
+      <image>
+        https://raw.githubusercontent.com/shonebinu/Brief/refs/heads/main/data/screenshots/brief-preferences.png</image>
+      <caption>Brief app preferences</caption>
     </screenshot>
   </screenshots>
 
   <releases>
-    <release version="0.1.0" date="2024-01-18">
-      <url type="details">https://example.org/changelog.html#version_1.0.1</url>
+    <release version="0.1.0" date="2025-12-15">
+      <!-- <url type="details">https://example.org/changelog.html#version_1.0.1</url> -->
       <description translate="no">
-        <p>Release description</p>
+        <p>Initial Release</p>
         <ul>
-          <li>List of changes</li>
-          <li>List of changes</li>
+          <li>GTK4 GUI for tldr pages</li>
         </ul>
       </description>
     </release>
