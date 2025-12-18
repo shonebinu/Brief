@@ -3,7 +3,7 @@ import gi
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
-from gi.repository import Adw, Gio, GObject, Gtk, Pango
+from gi.repository import Adw, Gio, GObject, Gtk, Pango, GLib
 
 
 class CommandItem(GObject.Object):
@@ -62,9 +62,14 @@ class BriefSidebar(Adw.NavigationPage):
     results_list_view = Gtk.Template.Child()
     item_factory = Gtk.Template.Child()
 
-    def __init__(self, manager, **kwargs):
+    progress_revealer = Gtk.Template.Child()
+    progress_bar = Gtk.Template.Child()
+    status_label = Gtk.Template.Child()
+
+    def __init__(self, manager, toast_overlay, **kwargs):
         super().__init__(**kwargs)
         self.manager = manager
+        self.toast_overlay = toast_overlay
 
         self.list_store = Gio.ListStore(item_type=CommandItem)
 
@@ -120,11 +125,20 @@ class BriefSidebar(Adw.NavigationPage):
         self.selection_model.set_selected(Gtk.INVALID_LIST_POSITION)
 
     def on_search_changed(self, _entry):
+        if getattr(self, "_search_timeout", None) is not None:
+            GLib.source_remove(self._search_timeout)
+
+        self._search_timeout = GLib.timeout_add(150, self._apply_search)
+
+    def _apply_search(self):
         self.filter.changed(Gtk.FilterChange.DIFFERENT)
         self.sorter.changed(Gtk.SorterChange.DIFFERENT)
 
         if self.selection_model.get_n_items() > 0:
             self.results_list_view.scroll_to(0, Gtk.ListScrollFlags.NONE, None)
+
+        self._search_timeout = None
+        return False
 
     def on_search_activate(self, _entry):
         if self.selection_model.get_n_items() > 0:
@@ -155,3 +169,26 @@ class BriefSidebar(Adw.NavigationPage):
             return 0 if s == query else 1 if s.startswith(query) else 2
 
         return (rank(s1) - rank(s2)) or (s1 > s2) - (s1 < s2)
+
+    def start_update_process(self):
+        self.progress_revealer.set_reveal_child(True)
+        self.progress_bar.set_fraction(0)
+        self.status_label.set_label("Preparing...")
+
+        self.manager.update_cache(
+            progress_cb=self._on_update_progress, finished_cb=self._on_update_finished
+        )
+
+    def _on_update_progress(self, fraction, text):
+        self.status_label.set_label(text)
+        self.progress_bar.set_fraction(fraction)
+
+    def _on_update_finished(self, success, message):
+        self.progress_revealer.set_reveal_child(False)
+
+        toast = Adw.Toast.new(message)
+        toast.set_timeout(2)
+        self.toast_overlay.add_toast(toast)
+
+        if success:
+            self.refresh_data()

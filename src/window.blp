@@ -23,17 +23,19 @@ template $BriefWindow: Adw.ApplicationWindow {
         [top]
         Adw.HeaderBar {}
 
-        content: Stack content_stack {
-          transition-type: crossfade;
+        content: Adw.ToastOverlay toast_overlay {
+          Stack content_stack {
+            transition-type: crossfade;
 
-          Adw.StatusPage status_page {
-            icon-name: "system-search-symbolic";
-            title: "Search Brief";
-            description: "Try searching for commands like <span font_family='Monospace'>ls</span> or <span font_family='Monospace'>cd</span>";
+            Adw.StatusPage status_page {
+              icon-name: "system-search-symbolic";
+              title: "Search Brief";
+              description: "Try searching for commands like <span font_family='Monospace'>ls</span> or <span font_family='Monospace'>cd</span>";
 
-            styles [
-              "compact",
-            ]
+              styles [
+                "compact",
+              ]
+            }
           }
         };
       }

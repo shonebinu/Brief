@@ -7,13 +7,14 @@ from .tldr import PageManager
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, Gtk, Gio
 
 
 @Gtk.Template(resource_path="/io/github/shonebinu/Brief/window.ui")
 class BriefWindow(Adw.ApplicationWindow):
     __gtype_name__ = "BriefWindow"
 
+    toast_overlay = Gtk.Template.Child()
     content_stack = Gtk.Template.Child()
     split_view = Gtk.Template.Child()
     navigation_page = Gtk.Template.Child()
@@ -24,15 +25,25 @@ class BriefWindow(Adw.ApplicationWindow):
         self.manager = PageManager()
         self.current_item = None
 
-        self.sidebar = BriefSidebar(self.manager)
+        self.sidebar = BriefSidebar(self.manager, self.toast_overlay)
         self.sidebar.connect("command-activated", self.on_command_selected)
 
         self.split_view.set_sidebar(self.sidebar)
 
-        self.command_view = CommandPage()
+        self.command_view = CommandPage(self.toast_overlay)
         self.content_stack.add_named(self.command_view, "content")
 
         self.manager.settings.connect("changed", self.on_settings_changed)
+
+        self.setup_actions()
+
+    def setup_actions(self):
+        action = Gio.SimpleAction.new("update_cache", None)
+        action.connect("activate", self.on_update_cache_action)
+        self.add_action(action)
+
+    def on_update_cache_action(self, action, param):
+        self.sidebar.start_update_process()
 
     def on_command_selected(self, sidebar, item: CommandItem):
         self.load_command_page(item)

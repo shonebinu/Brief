@@ -27,6 +27,32 @@ template $BriefSidebar: Adw.NavigationPage {
         margin-end: 6;
       }
 
+      Revealer progress_revealer {
+        reveal-child: false;
+        transition-type: slide_down;
+
+        Box {
+          orientation: vertical;
+          margin-start: 12;
+          margin-end: 12;
+          margin-bottom: 12;
+          spacing: 6;
+
+          Label status_label {
+            halign: start;
+
+            styles [
+              "caption",
+              "dim-label",
+            ]
+          }
+
+          ProgressBar progress_bar {
+            hexpand: true;
+          }
+        }
+      }
+
       ScrolledWindow {
         vexpand: true;
         hscrollbar-policy: never;
@@ -49,7 +75,7 @@ menu primary_menu {
   section {
     item {
       label: _("_Update Cache");
-      action: "app.update_cache";
+      action: "win.update_cache";
     }
 
     item {

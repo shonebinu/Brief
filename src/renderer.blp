@@ -2,22 +2,20 @@ using Gtk 4.0;
 using Adw 1;
 
 template $CommandPage: Adw.Bin {
-  Adw.ToastOverlay overlay {
-    ScrolledWindow scroller {
-      vexpand: true;
-      hexpand: true;
+  ScrolledWindow scroller {
+    vexpand: true;
+    hexpand: true;
 
-      Adw.Clamp {
-        maximum-size: 800;
-        margin-top: 24;
-        margin-bottom: 24;
-        margin-start: 12;
-        margin-end: 12;
+    Adw.Clamp {
+      maximum-size: 800;
+      margin-top: 24;
+      margin-bottom: 24;
+      margin-start: 12;
+      margin-end: 12;
 
-        Box content_box {
-          orientation: vertical;
-          spacing: 12;
-        }
+      Box content_box {
+        orientation: vertical;
+        spacing: 12;
       }
     }
   }

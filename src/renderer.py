@@ -12,12 +12,13 @@ from gi.repository import Adw, Gdk, Gtk
 class CommandPage(Adw.Bin):
     __gtype_name__ = "CommandPage"
 
-    overlay = Gtk.Template.Child()
     content_box = Gtk.Template.Child()
     scroller = Gtk.Template.Child()
 
-    def __init__(self, **kwargs):
+    def __init__(self, toast_overlay, **kwargs):
         super().__init__(**kwargs)
+
+        self.toast_overlay = toast_overlay
 
     def display_content(self, raw_text, cmd_arg_format):
         self.scroller.get_vadjustment().set_value(0)
@@ -133,4 +134,4 @@ class CommandPage(Adw.Bin):
 
         toast = Adw.Toast.new("Copied to clipboard")
         toast.set_timeout(2)
-        self.overlay.add_toast(toast)
+        self.toast_overlay.add_toast(toast)
