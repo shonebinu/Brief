@@ -82,6 +82,8 @@ class PageManager:
         for lang in enabled_langs:
             for plat in enabled_plats:
                 path = base_path / f"pages.{lang}" / plat
+                if not path.exists():
+                    continue
                 entries = [
                     entry.name[:-3]
                     for entry in path.iterdir()
