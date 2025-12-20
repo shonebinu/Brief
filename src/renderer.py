@@ -124,7 +124,7 @@ class CommandPage(Adw.Bin):
         toast.set_timeout(2)
         self.toast_overlay.add_toast(toast)
 
-    def format_command(text, fmt):
+    def format_command(self, text, fmt):
         # https://github.com/tldr-pages/tldr/blob/v2.3/CLIENT-SPECIFICATION.md#page-structure
         pattern = r"\\\{\\\{|\\\}\\\}|\{\{(.*?)\}\}"
 

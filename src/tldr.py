@@ -3,11 +3,10 @@ import shutil
 import threading
 from collections import defaultdict
 from pathlib import Path
-import gi
 import langcodes
+import requests
 
-gi.require_version("Soup", "3.0")
-from gi.repository import Gio, GLib, Soup
+from gi.repository import Gio, GLib
 
 
 class PageManager:
@@ -24,7 +23,6 @@ class PageManager:
         self.zip_path = self.cache_dir / "tldr.zip"
 
         self.settings = Gio.Settings.new("io.github.shonebinu.Brief")
-        self.session = Soup.Session.new()
 
     def _get_data_dir(self):
         return (
@@ -95,77 +93,45 @@ class PageManager:
     def update_cache(self, progress_cb, finished_cb):
         self.progress_cb = progress_cb
         self.finished_cb = finished_cb
-        self.downloaded = 0
 
-        self.msg = Soup.Message.new("GET", self.TLDR_PAGES_ZIP_URL)
+        threading.Thread(target=self.download_and_process_tldr_zip, daemon=True).start()
 
-        self.msg.connect("got-body-data", self._on_got_body_data)
-
-        self.session.send_async(
-            self.msg,
-            GLib.PRIORITY_DEFAULT,
-            None,
-            self._on_response_finished,
-            None,
-        )
-
-    def _on_got_body_data(self, msg, chunk):
-        self.downloaded += chunk
-        total = msg.get_response_headers().get_content_length()
-
-        fraction = 0 if not total else self.downloaded / total
-
-        GLib.idle_add(
-            self.progress_cb,
-            fraction,
-            f"Downloading... {(fraction * 100):.0f}% ({(self.downloaded / 1024 / 1024):.2f} MB)",
-        )
-
-    def _on_response_finished(self, session, result, data):
+    def download_and_process_tldr_zip(self):
         try:
-            stream = session.send_finish(result)
+            self.cache_dir.mkdir(parents=True, exist_ok=True)
+            Path(self.zip_path).unlink(missing_ok=True)
 
-            file = Gio.File.new_for_path(str(self.zip_path))
-            output = file.replace(
-                None,
-                False,
-                Gio.FileCreateFlags.REPLACE_DESTINATION,
-                None,
-            )
-
-            output.splice_async(
-                stream,
-                Gio.OutputStreamSpliceFlags.CLOSE_SOURCE
-                | Gio.OutputStreamSpliceFlags.CLOSE_TARGET,
-                GLib.PRIORITY_DEFAULT,
-                None,
-                self._on_splice_finished,
-                None,
-            )
-
-        except GLib.Error as e:
-            GLib.idle_add(self.finished_cb, False, e.message)
-
-    def _on_splice_finished(self, output, result, data):
-        try:
-            output.splice_finish(result)
-            GLib.idle_add(self.progress_cb, 1.0, "Extracting...")
-
-            threading.Thread(target=self._extract_in_thread, daemon=True).start()
-
-        except GLib.Error as e:
-            GLib.idle_add(self.finished_cb, False, e.message)
-
-    def _extract_in_thread(self):
-        try:
-            self.process_zip()
+            self.download_tldr_zip()
+            GLib.idle_add(self.progress_cb, 1, "Extracting...")
+            self.process_tldr_zip()
             GLib.idle_add(self.finished_cb, True, "Cache updated successfully")
+        except requests.exceptions.ConnectionError:
+            GLib.idle_add(self.finished_cb, False, "No network connection")
+        except requests.exceptions.Timeout:
+            GLib.idle_add(self.finished_cb, False, "Connection timed out")
         except Exception as e:
             GLib.idle_add(self.finished_cb, False, str(e))
 
-    def process_zip(self):
-        self.cache_dir.mkdir(parents=True, exist_ok=True)
+    def download_tldr_zip(self):
+        with requests.get(self.TLDR_PAGES_ZIP_URL, stream=True, timeout=15) as r:
+            r.raise_for_status()
+            total_size = int(r.headers.get("content-length", 0))
+            chunk_size = 8192  # 8 KB
+            downloaded = 0
 
+            with open(self.zip_path, "wb") as f:
+                for chunk in r.iter_content(chunk_size=chunk_size):
+                    if chunk:
+                        f.write(chunk)
+                        downloaded += len(chunk)
+                        fraction = downloaded / total_size if total_size else 0
+                        GLib.idle_add(
+                            self.progress_cb,
+                            fraction,
+                            f"Downloading... {int(fraction * 100)}% ({(downloaded / 1024 / 1024):.1f}) MB",
+                        )
+
+    def process_tldr_zip(self):
         extract_temp = Path(self.cache_dir) / "temp_extract"
         shutil.rmtree(extract_temp, ignore_errors=True)
 
