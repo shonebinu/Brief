@@ -5,6 +5,7 @@ from collections import defaultdict
 from pathlib import Path
 import langcodes
 import requests
+import os
 
 from gi.repository import Gio, GLib
 
@@ -148,7 +149,7 @@ class PageManager:
                         )
 
     def process_tldr_zip(self):
-        extract_temp = Path(self.cache_dir) / "tldr.tmp"
+        extract_temp = self.cache_dir / "tldr.tmp"
         shutil.rmtree(extract_temp, ignore_errors=True)
 
         shutil.unpack_archive(self.zip_path, extract_temp)
@@ -177,7 +178,7 @@ class PageManager:
         )
 
         shutil.rmtree(self.local_data_dir, ignore_errors=True)
-        shutil.move(extract_temp, self.local_data_dir)
+        os.replace(extract_temp, self.local_data_dir)  # atomic operation
 
         self.zip_path.unlink()
         shutil.rmtree(extract_temp, ignore_errors=True)
