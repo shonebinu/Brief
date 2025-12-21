@@ -102,7 +102,7 @@ class PageManager:
             Path(self.zip_path).unlink(missing_ok=True)
 
             self.download_tldr_zip()
-            GLib.idle_add(self.progress_cb, 1, "Extracting...")
+            GLib.idle_add(self.progress_cb, -1, "Extracting...")
             self.process_tldr_zip()
             GLib.idle_add(self.finished_cb, True, "Cache updated successfully")
         except requests.exceptions.ConnectionError:

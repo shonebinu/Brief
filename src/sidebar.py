@@ -12,12 +12,14 @@ class CommandItem(GObject.Object):
     name = GObject.Property(type=str)
     platform = GObject.Property(type=str)
     language = GObject.Property(type=str)
+    search_key = GObject.Property(type=str)
 
     def __init__(self, name, platform, language):
         super().__init__()
         self.name = name
         self.platform = platform
         self.language = language
+        self.search_key = name.lower().replace(" ", "").replace("-", "")
 
 
 class CommandListRow(Gtk.Box):
@@ -77,27 +79,21 @@ class BriefSidebar(Adw.NavigationPage):
 
         self.list_store = Gio.ListStore(item_type=CommandItem)
 
-        self.item_factory.connect("setup", self._on_factory_setup)
-        self.item_factory.connect("bind", self._on_factory_bind)
+        self.item_factory.connect("setup", lambda _, li: li.set_child(CommandListRow()))
+        self.item_factory.connect(
+            "bind", lambda _, li: li.get_child().bind(li.get_item())
+        )
 
         self.process_commands()
         self.setup_models()
 
         self.manager.settings.connect("changed", self.refresh_data)
-        self.search_entry.connect("search-changed", self.on_search_changed)
         self.search_entry.connect("activate", self.on_search_activate)
+        self.search_entry.connect("search-changed", self.on_search_changed)
         self.results_list_view.connect("activate", self.on_list_item_activated)
 
         self.is_updating = False
         self.timeout_id = None
-
-    def _on_factory_setup(self, _factory, list_item):
-        list_item.set_child(CommandListRow())
-
-    def _on_factory_bind(self, _factory, list_item):
-        row_widget = list_item.get_child()
-        item = list_item.get_item()
-        row_widget.bind(item)
 
     def process_commands(self):
         commands_map = self.manager.get_all_commands()
@@ -113,69 +109,85 @@ class BriefSidebar(Adw.NavigationPage):
         self.list_store.splice(0, 0, command_items)
 
     def setup_models(self):
+        name_expression = Gtk.PropertyExpression.new(CommandItem, None, "name")
+
         self.filter = Gtk.CustomFilter.new(match_func=self.filter_func)
         self.filter_model = Gtk.FilterListModel(
             model=self.list_store, filter=self.filter
         )
 
-        self.sorter = Gtk.CustomSorter.new(sort_func=self.sort_func)
-        self.sort_model = Gtk.SortListModel(model=self.filter_model, sorter=self.sorter)
+        multi_sorter = Gtk.MultiSorter()
 
-        self.selection_model = Gtk.SingleSelection(
-            model=self.sort_model, autoselect=False, selected=Gtk.INVALID_LIST_POSITION
+        self.rank_sorter = Gtk.CustomSorter.new(self.sort_by_relevance)
+        multi_sorter.append(self.rank_sorter)
+
+        alpha_sorter = Gtk.StringSorter(expression=name_expression)
+        multi_sorter.append(alpha_sorter)
+
+        self.sort_model = Gtk.SortListModel(
+            model=self.filter_model, sorter=multi_sorter
         )
 
+        self.selection_model = Gtk.SingleSelection(
+            model=self.sort_model,
+            autoselect=False,
+            can_unselect=True,
+            selected=Gtk.INVALID_LIST_POSITION,
+        )
         self.results_list_view.set_model(self.selection_model)
 
-    def refresh_data(self, *args):
-        self.process_commands()
-        self.selection_model.set_selected(Gtk.INVALID_LIST_POSITION)
+    def filter_func(self, item, *args):
+        query = self.search_entry.get_text().lower().replace(" ", "").replace("-", "")
 
-    def on_search_changed(self, _entry):
-        if getattr(self, "_search_timeout", None) is not None:
-            GLib.source_remove(self._search_timeout)
+        if not query:
+            return True
 
-        self._search_timeout = GLib.timeout_add(150, self._apply_search)
+        return query in item.search_key
 
-    def _apply_search(self):
+    def sort_by_relevance(self, item1, item2, *args):
+        query = self.search_entry.get_text().lower().replace(" ", "").replace("-", "")
+        if not query:
+            return Gtk.Ordering.EQUAL
+
+        s1, s2 = item1.search_key, item2.search_key
+
+        def get_rank(s):
+            if s == query:
+                return 0
+            if s.startswith(query):
+                return 1
+            return 2
+
+        r1, r2 = get_rank(s1), get_rank(s2)
+
+        if r1 < r2:
+            return Gtk.Ordering.SMALLER
+        if r1 > r2:
+            return Gtk.Ordering.LARGER
+        return Gtk.Ordering.EQUAL
+
+    def on_search_changed(self, entry):
         self.filter.changed(Gtk.FilterChange.DIFFERENT)
-        self.sorter.changed(Gtk.SorterChange.DIFFERENT)
+        self.rank_sorter.changed(Gtk.SorterChange.DIFFERENT)
 
         if self.selection_model.get_n_items() > 0:
             self.results_list_view.scroll_to(0, Gtk.ListScrollFlags.NONE, None)
-
-        self._search_timeout = None
-        return False
-
-    def on_search_activate(self, _entry):
-        if self.selection_model.get_n_items() > 0:
-            self.selection_model.set_selected(0)
-            selected_item = self.selection_model.get_selected_item()
-            if selected_item:
-                self.emit("command-activated", selected_item)
 
     def on_list_item_activated(self, list_view, position):
         item = self.selection_model.get_item(position)
         if item:
             self.emit("command-activated", item)
 
-    def filter_func(self, item, *args):
-        query = self.search_entry.get_text().lower()
-        return not query or query in item.name.lower()
+    def on_search_activate(self, _entry):
+        if self.selection_model.get_n_items() > 0:
+            item = self.selection_model.get_item(0)
+            if item:
+                self.selection_model.set_selected(0)
+                self.emit("command-activated", item)
 
-    def sort_func(self, item1, item2, *args):
-        query = self.search_entry.get_text().lower()
-        if not query:
-            return (item1.name.lower() > item2.name.lower()) - (
-                item1.name.lower() < item2.name.lower()
-            )
-
-        s1, s2 = item1.name.lower(), item2.name.lower()
-
-        def rank(s):
-            return 0 if s == query else 1 if s.startswith(query) else 2
-
-        return (rank(s1) - rank(s2)) or (s1 > s2) - (s1 < s2)
+    def refresh_data(self, *args):
+        self.process_commands()
+        self.selection_model.set_selected(Gtk.INVALID_LIST_POSITION)
 
     def start_update_process(self):
         if self.is_updating:
@@ -189,11 +201,7 @@ class BriefSidebar(Adw.NavigationPage):
         self.progress_revealer.set_reveal_child(True)
         self.status_label.set_label("Preparing...")
 
-        def pulse():
-            self.progress_bar.pulse()
-            return True
-
-        self.timeout_id = GLib.timeout_add(100, pulse)
+        self.timeout_id = GLib.timeout_add(100, self.pulse)
 
         self.manager.update_cache(
             progress_cb=self.on_update_progress, finished_cb=self.on_update_finished
@@ -206,6 +214,14 @@ class BriefSidebar(Adw.NavigationPage):
                 GLib.source_remove(self.timeout_id)
                 self.timeout_id = None
             self.progress_bar.set_fraction(fraction)
+        else:
+            if self.timeout_id is None:
+                self.progress_bar.set_fraction(0.0)
+                self.timeout_id = GLib.timeout_add(100, self.pulse)
+
+    def pulse(self):
+        self.progress_bar.pulse()
+        return True
 
     def on_update_finished(self, success, message):
         if self.timeout_id:
