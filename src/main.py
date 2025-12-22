@@ -8,7 +8,7 @@ from .window import BriefWindow
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
-from gi.repository import Adw, Gio
+from gi.repository import Adw, Gio, Gtk
 
 
 class BriefApplication(Adw.Application):
@@ -35,8 +35,24 @@ class BriefApplication(Adw.Application):
             developer_name="Shone Binu",
             version="0.1.0",
             developers=["Shone Binu"],
-            copyright="© 2025 Shone Binu",
+            copyright="© 2025-present Shone Binu",
+            website="https://github.com/shonebinu/Brief",
+            issue_url="https://github.com/shonebinu/Brief/issues",
+            license_type="GTK_LICENSE_GPL_3_0",
+            comments="Brief is a GTK application for browsing tldr-pages (community maintained command-line help pages).",
         )
+
+        about.add_link("Donate with Ko-Fi", "https://ko-fi.com/shonebinu")
+        about.add_link("Sponsor on Github", "https://github.com/sponsors/shonebinu")
+        about.add_link("tldr-pages Github", "https://github.com/tldr-pages/tldr")
+
+        about.add_legal_section(
+            "Data Source",
+            "© 2014—present the <a href='https://github.com/orgs/tldr-pages/people'>tldr-pages team</a> and <a href='https://github.com/tldr-pages/tldr/graphs/contributors'>contributors</a>.",
+            Gtk.License.CUSTOM,
+            "This work is licensed under the <a href='https://creativecommons.org/licenses/by/4.0/'>Creative Commons Attribution 4.0 International License</a> (CC-BY).",
+        )
+
         about.present(self.props.active_window)
 
     def on_preferences_action(self, widget, _):
