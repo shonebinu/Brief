@@ -1,14 +1,16 @@
 <div align=center>
 
+![Brief app screenshot](./data/screenshots/banner.png)
+
 <img src="./data/icons/hicolor/scalable/apps/io.github.shonebinu.Brief.svg" alt="Brief Logo" width="128" >
 
 # Brief
 
 **Browse command-line cheatsheets**
 
-[![Flathub Downloads](https://img.shields.io/flathub/downloads/io.github.shonebinu.Brief?style=for-the-badge&logo=flathub)](https://flathub.org/apps/io.github.shonebinu.Brief)
-
-![Brief app screenshot](./data/screenshots/brief.png)
+![Flathub Downloads](https://img.shields.io/flathub/downloads/io.github.shonebinu.Brief?style=for-the-badge)
+![Flathub Version](https://img.shields.io/flathub/v/io.github.shonebinu.Brief?style=for-the-badge)
+![GitHub License](https://img.shields.io/github/license/shonebinu/Brief?style=for-the-badge&color=yellow)
 
 </div>
 

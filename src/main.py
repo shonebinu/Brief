@@ -36,7 +36,7 @@ class BriefApplication(Adw.Application):
             application_name="Brief",
             application_icon="io.github.shonebinu.Brief",
             developer_name="Shone Binu",
-            version="0.1.0",
+            version="0.2.0",
             developers=["Shone Binu"],
             copyright="© 2025-present Shone Binu",
             website="https://github.com/shonebinu/Brief",

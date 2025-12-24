@@ -5,16 +5,18 @@
   <project_license>GPL-3.0-or-later</project_license>
 
   <name>Brief</name>
-  <summary>A GUI for tldr pages</summary>
+  <summary>Browse command-line cheatsheets</summary>
   <description>
-    <p>Brief is a GTK4 application for browsing tldr-pages. It provides a clean, native
-      interface to view community-maintained help pages for command-line tools.</p>
+    <p>Brief is an app for browsing command-line cheatsheets. It lets you search through thousands
+      of command-line tools across multiple platforms and languages, providing simplified help
+      pages.</p>
     <p>Features:</p>
     <ul>
-      <li>Built with GTK4 and Libadwaita for a seamless GNOME experience.</li>
-      <li>Works offline with cached pages.</li>
-      <li>Filter platform-specific commands (Linux, Windows, Android, etc.).</li>
-      <li>Browse commands in multiple languages.</li>
+      <li>Works completely offline.</li>
+      <li>Filter platform specific commands (Linux, Windows, Android, etc.).</li>
+      <li>View command help pages in multiple available languages.</li>
+      <li>Change the command argument format between long (`ls --all`) or short (`ls -a`).</li>
+      <li>Lets you update the cache within the app to download the latest data.</li>
     </ul>
   </description>
 
@@ -27,25 +29,26 @@
   <!-- Recommended: It is highly recommended for open-source projects to display the source code
   repository -->
   <url type="vcs-browser">https://github.com/shonebinu/Brief</url>
+
   <!-- Should point to the software's bug tracking system, for users to report new bugs -->
   <url type="bugtracker">https://github.com/shonebinu/Brief/issues</url>
   <!-- Should link a FAQ page for this software, to answer some of the most-asked questions in
   detail -->
   <!-- URLs of this type should point to a webpage where users can submit or modify translations of
   the upstream project -->
-  <url type="translate">https://github.com/shonebinu/Brief</url>
-  <url type="faq">https://github.com/shonebinu/Brief</url>
+  <!-- <url type="translate">https://github.com/shonebinu/Brief</url>
+  <url type="faq">https://github.com/shonebinu/Brief</url> -->
   <!-- Should provide a web link to an online user's reference, a software manual or help page -->
-  <url type="help">https://github.com/shonebinu/Brief</url>
+  <!-- <url type="help">https://github.com/shonebinu/Brief</url> -->
   <!-- URLs of this type should point to a webpage showing information on how to donate to the
   described software project -->
-  <url type="donation">https://shonebinu.com</url>
+  <!-- <url type="donation">https://shonebinu.com</url> -->
   <!-- This could for example be an HTTPS URL to an online form or a page describing how to contact
   the developer -->
-  <url type="contact">https://shonebinu.com</url>
+  <!-- <url type="contact">https://shonebinu.com</url> -->
   <!-- URLs of this type should point to a webpage showing information on how to contribute to the
   described software project -->
-  <url type="contribute">https://github.com/shonebinu/Brief</url>
+  <!-- <url type="contribute">https://github.com/shonebinu/Brief</url> -->
 
   <translation type="gettext">brief</translation>
   <!-- All graphical applications having a desktop file must have this tag in the MetaInfo.
@@ -58,8 +61,8 @@
 
   <!-- Applications should set a brand color in both light and dark variants like so -->
   <branding>
-    <color type="primary" scheme_preference="light">#ff00ff</color>
-    <color type="primary" scheme_preference="dark">#993d3d</color>
+    <color type="primary" scheme_preference="light">#99c1f1</color>
+    <color type="primary" scheme_preference="dark">#deddda</color>
   </branding>
 
   <screenshots>
@@ -68,14 +71,18 @@
         https://raw.githubusercontent.com/shonebinu/Brief/refs/heads/main/data/screenshots/brief.png</image>
       <caption>Brief app</caption>
     </screenshot>
-    <screenshot>
-      <image>
-        https://raw.githubusercontent.com/shonebinu/Brief/refs/heads/main/data/screenshots/brief-preferences.png</image>
-      <caption>Brief app preferences</caption>
-    </screenshot>
   </screenshots>
 
   <releases>
+    <release version="0.2.0" date="2025-12-25">
+      <description translate="no">
+        <p>Release 0.2.0</p>
+        <ul>
+          <li>Implement update cache feature</li>
+          <li>Improve the initial starting delay</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.0" date="2025-12-15">
       <!-- <url type="details">https://example.org/changelog.html#version_1.0.1</url> -->
       <description translate="no">
