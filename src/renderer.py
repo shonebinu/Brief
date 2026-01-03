@@ -5,7 +5,7 @@ import gi
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
-from gi.repository import Adw, Gdk, Gtk
+from gi.repository import Adw, Gdk, Gtk, GLib
 
 
 @Gtk.Template(resource_path="/io/github/shonebinu/Brief/renderer.ui")
@@ -44,7 +44,7 @@ class CommandPage(Adw.Bin):
                 )
 
             elif line.startswith("> "):
-                text_content = line[2:]
+                text_content = GLib.markup_escape_text(line[2:])
 
                 text_content = re.sub(
                     r"`([^`]+)`",
@@ -53,9 +53,8 @@ class CommandPage(Adw.Bin):
                 )
 
                 text_content = re.sub(
-                    r"<(https?://[^>]+)>", r'<a href="\1">\1</a>', text_content
+                    r"&lt;(https?://[^&]+)&gt;", r'<a href="\1">\1</a>', text_content
                 )
-
                 self.content_box.append(
                     Gtk.Label(
                         label=text_content,

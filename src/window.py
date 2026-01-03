@@ -18,14 +18,15 @@ class BriefWindow(Adw.ApplicationWindow):
     split_view = Gtk.Template.Child()
     navigation_page = Gtk.Template.Child()
 
-    def __init__(self, **kwargs):
+    def __init__(self, manager, **kwargs):
         super().__init__(**kwargs)
 
-        self.manager = self.get_application().manager
+        self.manager = manager
         self.current_item = None
 
-        self.sidebar = BriefSidebar(self.manager, self.toast_overlay)
-        self.sidebar.connect("command-activated", self.on_command_selected)
+        self.sidebar = BriefSidebar(
+            self.manager, self.load_command_page, self.toast_overlay
+        )
 
         self.split_view.set_sidebar(self.sidebar)
 
@@ -41,11 +42,8 @@ class BriefWindow(Adw.ApplicationWindow):
         action.connect("activate", self.on_update_cache_action)
         self.add_action(action)
 
-    def on_update_cache_action(self, action, param):
+    def on_update_cache_action(self, *args):
         self.sidebar.start_update_process()
-
-    def on_command_selected(self, sidebar, item: CommandItem):
-        self.load_command_page(item)
 
     def load_command_page(self, item: CommandItem):
         self.current_item = item
@@ -60,6 +58,6 @@ class BriefWindow(Adw.ApplicationWindow):
             )
             self.split_view.set_show_content(True)
 
-    def on_settings_changed(self, settings, key):
+    def on_settings_changed(self, *args):
         if self.current_item and self.split_view.get_show_content():
             self.load_command_page(self.current_item)

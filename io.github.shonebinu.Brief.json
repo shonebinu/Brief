@@ -91,6 +91,39 @@
       ]
     },
     {
+      "name": "python3-scikit-build-core",
+      "buildsystem": "simple",
+      "build-commands": [
+        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"scikit-build-core\" --no-build-isolation"
+      ],
+      "sources": [
+        {
+          "type": "file",
+          "url": "https://files.pythonhosted.org/packages/cc/20/ff623b09d963f88bfde16306a54e12ee5ea43e9b597108672ff3a408aad6/pathspec-0.12.1-py3-none-any.whl",
+          "sha256": "a0d503e138a4c123b27490a4f7beda6a01c6f288df0e4a8b79c7eb0dc7b4cc08"
+        },
+        {
+          "type": "file",
+          "url": "https://files.pythonhosted.org/packages/43/49/ec16b3db6893db788ae35f98506ff5a9c25dca7eb18cc38ada8a4c1dc944/scikit_build_core-0.11.6-py3-none-any.whl",
+          "sha256": "ce6d8fe64e6b4c759ea0fb95d2f8a68f60d2df31c2989838633b8ec930736360"
+        }
+      ]
+    },
+    {
+      "name": "python3-rapidfuzz",
+      "buildsystem": "simple",
+      "build-commands": [
+        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"rapidfuzz\" --no-build-isolation"
+      ],
+      "sources": [
+        {
+          "type": "file",
+          "url": "https://files.pythonhosted.org/packages/d3/28/9d808fe62375b9aab5ba92fa9b29371297b067c2790b2d7cda648b1e2f8d/rapidfuzz-3.14.3.tar.gz",
+          "sha256": "2491937177868bc4b1e469087601d53f925e8d270ccc21e07404b4b5814b7b5f"
+        }
+      ]
+    },
+    {
       "name": "tldr",
       "buildsystem": "simple",
       "build-commands": [

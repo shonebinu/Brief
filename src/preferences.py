@@ -37,24 +37,20 @@ class BriefPreferencesWindow(Adw.PreferencesDialog):
 
     def setup_expander(self, expander_row, key, items):
         current_selection = self.settings.get_strv(key)
-
         for label, code in items:
             row = Adw.SwitchRow(title=label, active=code in current_selection)
             row.connect("notify::active", self.on_list_toggled, key, code)
             expander_row.add_row(row)
 
-    def on_list_toggled(self, row, param, key, code):
-        current_list = list(self.settings.get_strv(key))
-        is_active = row.get_active()
+    def on_list_toggled(self, row, pspec, key, code):
+        current_list = set(self.settings.get_strv(key))
 
-        if is_active:
-            if code not in current_list:
-                current_list.append(code)
+        if row.get_active():
+            current_list.add(code)
         else:
-            if code in current_list:
-                current_list.remove(code)
+            current_list.discard(code)
 
-        self.settings.set_strv(key, current_list)
+        self.settings.set_strv(key, list(current_list))
 
     def setup_combo(self, row, key, names, codes):
         row.set_model(Gtk.StringList.new(names))

@@ -6,7 +6,7 @@ from pathlib import Path
 import langcodes
 import requests
 import os
-
+from functools import lru_cache
 from gi.repository import Gio, GLib
 
 
@@ -25,6 +25,8 @@ class PageManager:
 
         self.settings = Gio.Settings.new("io.github.shonebinu.Brief")
 
+        self.is_updating = False
+
     def get_data_dir(self):
         return (
             self.local_data_dir
@@ -32,6 +34,7 @@ class PageManager:
             else self.system_data_dir
         )
 
+    @lru_cache(maxsize=1)
     def get_commands_map(self):
         return json.loads(
             (self.get_data_dir() / "commands.json").read_text(encoding="utf-8")
@@ -79,7 +82,7 @@ class PageManager:
                 if plat in all_commands.get(lang, {}):
                     commands[lang][plat] = all_commands[lang][plat]
 
-        return dict(commands)
+        return commands
 
     def get_page(self, lang_code, platform, command):
         filepath = (
@@ -92,6 +95,10 @@ class PageManager:
         return f"Command '{command}' not found in path '{filepath}'."
 
     def update_cache(self, progress_cb, finished_cb):
+        if self.is_updating:
+            return finished_cb(False, "An update process is already going on")
+
+        self.is_updating = True
         self.progress_cb = progress_cb
         self.finished_cb = finished_cb
 
@@ -111,6 +118,8 @@ class PageManager:
             GLib.idle_add(self.finished_cb, False, "Connection timed out")
         except Exception as e:
             GLib.idle_add(self.finished_cb, False, str(e))
+        finally:
+            self.is_updating = False
 
     def download_tldr_zip(self):
         with requests.get(self.TLDR_PAGES_ZIP_URL, stream=True, timeout=15) as r:
@@ -119,33 +128,23 @@ class PageManager:
             total_size = int(r.headers.get("content-length", 0))
 
             with open(self.zip_path, "wb") as f:
-                for chunk in r.iter_content(chunk_size=16384):  # 16 KB
+                for chunk in r.iter_content(chunk_size=64 * 1024):
                     if chunk:
                         f.write(chunk)
                         downloaded += len(chunk)
 
-                        fraction = (downloaded / total_size) if total_size else -1
-
-                        label_text = (
-                            f"Downloading... {int(fraction * 100)}% ({(downloaded / 1024 / 1024):.1f}) MB"
-                            if total_size
-                            else f"Downloading... {(downloaded / 1024 / 1024):.1f} MB"
-                        )
-
                         if total_size > 0:
                             fraction = downloaded / total_size
                             percent = int(fraction * 100)
-                            label_text = f"Downloading... {percent}% ({downloaded / 1024 / 1024:.1f} MB)"
+                            label = f"Downloading... {percent}% ({downloaded / 1024 / 1024:.1f} MB)"
                         else:
                             fraction = -1.0
-                            label_text = (
-                                f"Downloading... {downloaded / 1024 / 1024:.1f} MB"
-                            )
+                            label = f"Downloading... {downloaded / 1024 / 1024:.1f} MB"
 
                         GLib.idle_add(
                             self.progress_cb,
                             fraction,
-                            label_text,
+                            label,
                         )
 
     def process_tldr_zip(self):
@@ -182,3 +181,5 @@ class PageManager:
 
         self.zip_path.unlink()
         shutil.rmtree(extract_temp, ignore_errors=True)
+
+        self.get_commands_map.cache_clear()

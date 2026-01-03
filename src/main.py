@@ -28,7 +28,7 @@ class BriefApplication(Adw.Application):
     def do_activate(self):
         win = self.props.active_window
         if not win:
-            win = BriefWindow(application=self)
+            win = BriefWindow(self.manager, application=self)
         win.present()
 
     def on_about_action(self, *args):

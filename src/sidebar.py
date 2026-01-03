@@ -1,4 +1,7 @@
 import gi
+import random
+from rapidfuzz import fuzz, utils
+from functools import lru_cache
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
@@ -12,86 +15,47 @@ class CommandItem(GObject.Object):
     name = GObject.Property(type=str)
     platform = GObject.Property(type=str)
     language = GObject.Property(type=str)
-    search_key = GObject.Property(type=str)
 
     def __init__(self, name, platform, language):
         super().__init__()
         self.name = name
         self.platform = platform
         self.language = language
-        self.search_key = name.lower().replace(" ", "").replace("-", "")
-
-
-class CommandListRow(Gtk.Box):
-    def __init__(self):
-        super().__init__(
-            orientation=Gtk.Orientation.HORIZONTAL,
-            spacing=8,
-            margin_start=8,
-            margin_end=8,
-            margin_top=8,
-            margin_bottom=8,
-        )
-
-        self.name_label = Gtk.Label(
-            xalign=0, hexpand=True, ellipsize=Pango.EllipsizeMode.END
-        )
-        self.append(self.name_label)
-
-        self.plat_box = Gtk.Box(spacing=4, css_classes=["dim-label"])
-        self.plat_box.append(Gtk.Image(icon_name="computer-symbolic"))
-        self.plat_label = Gtk.Label(css_classes=["caption"])
-        self.plat_box.append(self.plat_label)
-        self.append(self.plat_box)
-
-        self.lang_box = Gtk.Box(spacing=4, css_classes=["dim-label"])
-        self.lang_box.append(Gtk.Image(icon_name="preferences-desktop-locale-symbolic"))
-        self.lang_label = Gtk.Label(css_classes=["caption"])
-        self.lang_box.append(self.lang_label)
-        self.append(self.lang_box)
-
-    def bind(self, item: CommandItem):
-        self.name_label.set_label(item.name)
-        self.plat_label.set_label(item.platform)
-        self.lang_label.set_label(item.language)
 
 
 @Gtk.Template(resource_path="/io/github/shonebinu/Brief/sidebar.ui")
 class BriefSidebar(Adw.NavigationPage):
     __gtype_name__ = "BriefSidebar"
 
-    __gsignals__ = {
-        "command-activated": (GObject.SignalFlags.RUN_FIRST, None, (CommandItem,)),
-    }
-
     search_entry = Gtk.Template.Child()
-    results_list_view = Gtk.Template.Child()
-    item_factory = Gtk.Template.Child()
+
+    list_view = Gtk.Template.Child()
+    selection_model = Gtk.Template.Child()
+    list_store = Gtk.Template.Child()
+    sorter = Gtk.Template.Child()
+    filter = Gtk.Template.Child()
 
     progress_revealer = Gtk.Template.Child()
     progress_bar = Gtk.Template.Child()
     status_label = Gtk.Template.Child()
 
-    def __init__(self, manager, toast_overlay, **kwargs):
+    def __init__(self, manager, load_command_page, toast_overlay, **kwargs):
         super().__init__(**kwargs)
+
         self.manager = manager
+        self.load_command_page = load_command_page
         self.toast_overlay = toast_overlay
 
-        self.list_store = Gio.ListStore(item_type=CommandItem)
-
-        self.item_factory.connect("setup", lambda _, li: li.set_child(CommandListRow()))
-        self.item_factory.connect(
-            "bind", lambda _, li: li.get_child().bind(li.get_item())
-        )
+        self.is_updating = False
+        self.timeout_id = None
 
         self.process_commands()
-        self.setup_models()
+
+        self.setup_shortcuts()
 
         self.manager.settings.connect("changed", self.refresh_data)
-        self.search_entry.connect("activate", self.on_search_activate)
-        self.search_entry.connect("search-changed", self.on_search_changed)
-        self.results_list_view.connect("activate", self.on_list_item_activated)
 
+    def setup_shortcuts(self):
         shortcut_controller = Gtk.ShortcutController(scope=Gtk.ShortcutScope.MANAGED)
         trigger = Gtk.ShortcutTrigger.parse_string("<Control>k")
         action = Gtk.CallbackAction.new(
@@ -101,9 +65,6 @@ class BriefSidebar(Adw.NavigationPage):
         shortcut_controller.add_shortcut(shortcut)
         self.add_controller(shortcut_controller)
 
-        self.is_updating = False
-        self.timeout_id = None
-
     def process_commands(self):
         commands_map = self.manager.get_all_commands()
         command_items = [
@@ -112,87 +73,51 @@ class BriefSidebar(Adw.NavigationPage):
             for platform, cmd_list in platforms.items()
             for cmd in cmd_list
         ]
-        command_items.sort(key=lambda x: x.name)
+
+        random.shuffle(command_items)
 
         self.list_store.remove_all()
         self.list_store.splice(0, 0, command_items)
 
-    def setup_models(self):
-        name_expression = Gtk.PropertyExpression.new(CommandItem, None, "name")
+    @lru_cache(maxsize=30000)
+    def get_fuzzy_score(self, cmd_name, search_text):
+        score = fuzz.ratio(cmd_name, search_text, processor=utils.default_process)
+        return int(score * 100)
 
-        self.filter = Gtk.CustomFilter.new(match_func=self.filter_func)
-        self.filter_model = Gtk.FilterListModel(
-            model=self.list_store, filter=self.filter
-        )
+    @Gtk.Template.Callback()
+    def sort_commands(self, _obj, cmd_name, search_text):
+        if not search_text:
+            return 0
 
-        multi_sorter = Gtk.MultiSorter()
+        return self.get_fuzzy_score(cmd_name, search_text)
 
-        self.rank_sorter = Gtk.CustomSorter.new(self.sort_by_relevance)
-        multi_sorter.append(self.rank_sorter)
-
-        alpha_sorter = Gtk.StringSorter(expression=name_expression)
-        multi_sorter.append(alpha_sorter)
-
-        self.sort_model = Gtk.SortListModel(
-            model=self.filter_model, sorter=multi_sorter
-        )
-
-        self.selection_model = Gtk.SingleSelection(
-            model=self.sort_model,
-            autoselect=False,
-            can_unselect=True,
-            selected=Gtk.INVALID_LIST_POSITION,
-        )
-        self.results_list_view.set_model(self.selection_model)
-
-    def filter_func(self, item, *args):
-        query = self.search_entry.get_text().lower().replace(" ", "").replace("-", "")
-
-        if not query:
+    @Gtk.Template.Callback()
+    def filter_commands(self, _obj, cmd_name, search_text):
+        if not search_text:
             return True
 
-        return query in item.search_key
+        return self.get_fuzzy_score(cmd_name, search_text) >= 30 * 100
 
-    def sort_by_relevance(self, item1, item2, *args):
-        query = self.search_entry.get_text().lower().replace(" ", "").replace("-", "")
-        if not query:
-            return Gtk.Ordering.EQUAL
-
-        s1, s2 = item1.search_key, item2.search_key
-
-        def get_rank(s):
-            if s == query:
-                return 0
-            if s.startswith(query):
-                return 1
-            return 2
-
-        r1, r2 = get_rank(s1), get_rank(s2)
-
-        if r1 < r2:
-            return Gtk.Ordering.SMALLER
-        if r1 > r2:
-            return Gtk.Ordering.LARGER
-        return Gtk.Ordering.EQUAL
-
-    def on_search_changed(self, entry):
+    @Gtk.Template.Callback()
+    def on_search_changed(self, *args):
         self.filter.changed(Gtk.FilterChange.DIFFERENT)
-        self.rank_sorter.changed(Gtk.SorterChange.DIFFERENT)
-
+        self.sorter.changed(Gtk.SorterChange.DIFFERENT)
         if self.selection_model.get_n_items() > 0:
-            self.results_list_view.scroll_to(0, Gtk.ListScrollFlags.NONE, None)
+            self.list_view.scroll_to(0, Gtk.ListScrollFlags.NONE, None)
 
+    @Gtk.Template.Callback()
     def on_list_item_activated(self, list_view, position):
         item = self.selection_model.get_item(position)
         if item:
-            self.emit("command-activated", item)
+            self.load_command_page(item)
 
-    def on_search_activate(self, _entry):
+    @Gtk.Template.Callback()
+    def on_search_activate(self, *args):
         if self.selection_model.get_n_items() > 0:
             item = self.selection_model.get_item(0)
             if item:
                 self.selection_model.set_selected(0)
-                self.emit("command-activated", item)
+                self.load_command_page(item)
 
     def refresh_data(self, *args):
         self.process_commands()

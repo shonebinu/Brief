@@ -1,5 +1,6 @@
 using Gtk 4.0;
 using Adw 1;
+using Gio 2.0;
 
 template $BriefSidebar: Adw.NavigationPage {
   title: _("Brief");
@@ -25,6 +26,8 @@ template $BriefSidebar: Adw.NavigationPage {
         margin-bottom: 6;
         margin-start: 6;
         margin-end: 6;
+        search-changed => $on_search_changed();
+        activate => $on_search_activate();
       }
 
       Revealer progress_revealer {
@@ -55,16 +58,96 @@ template $BriefSidebar: Adw.NavigationPage {
 
       ScrolledWindow {
         vexpand: true;
-        hscrollbar-policy: never;
-
-        ListView results_list_view {
+        // https://blogs.gnome.org/monster/ui-first-search-with-list-models/ -> great help  to learn the pattern
+        ListView list_view {
           styles [
             "navigation-sidebar",
           ]
 
           single-click-activate: true;
+          activate => $on_list_item_activated();
 
-          factory: SignalListItemFactory item_factory {};
+          factory: BuilderListItemFactory {
+            template ListItem {
+              child: Box {
+                orientation: horizontal;
+                spacing: 8;
+                margin-start: 8;
+                margin-end: 8;
+                margin-top: 8;
+                margin-bottom: 8;
+
+                Label name_label {
+                  halign: start;
+                  hexpand: true;
+                  ellipsize: end;
+                  xalign: 0;
+                  label: bind (template.item as <$CommandItem>).name;
+                }
+
+                Box plat_box {
+                  spacing: 4;
+
+                  styles [
+                    "dim-label",
+                  ]
+
+                  Image {
+                    icon-name: "computer-symbolic";
+                  }
+
+                  Label plat_label {
+                    styles [
+                      "caption",
+                    ]
+
+                    label: bind (template.item as <$CommandItem>).platform;
+                  }
+                }
+
+                Box lang_box {
+                  spacing: 4;
+
+                  styles [
+                    "dim-label",
+                  ]
+
+                  Image {
+                    icon-name: "preferences-desktop-locale-symbolic";
+                  }
+
+                  Label lang_label {
+                    styles [
+                      "caption",
+                    ]
+
+                    label: bind (template.item as <$CommandItem>).language;
+                  }
+                }
+              };
+            }
+          };
+
+          model: SingleSelection selection_model {
+            autoselect: false;
+
+            model: SortListModel {
+              sorter: NumericSorter sorter {
+                sort-order: descending;
+                expression: expr $sort_commands(item as <$CommandItem>.name, search_entry.text) as <int>;
+              };
+
+              model: FilterListModel {
+                filter: BoolFilter filter {
+                  expression: expr $filter_commands(item as <$CommandItem>.name, search_entry.text) as <bool>;
+                };
+
+                model: Gio.ListStore list_store {
+                  item-type: typeof<$CommandItem>;
+                };
+              };
+            };
+          };
         }
       }
     };

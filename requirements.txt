@@ -1,4 +1,5 @@
 requests
 langcodes
 pygobject-stubs 
+rapidfuzz
 # https://pygobject.gnome.org/getting_started.html
