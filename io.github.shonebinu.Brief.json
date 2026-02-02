@@ -1,7 +1,7 @@
 {
   "id": "io.github.shonebinu.Brief",
   "runtime": "org.gnome.Platform",
-  "runtime-version": "master",
+  "runtime-version": "49",
   "sdk": "org.gnome.Sdk",
   "command": "brief",
   "finish-args": [
