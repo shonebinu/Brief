@@ -3,8 +3,8 @@ import sys
 import gi
 
 from .preferences import BriefPreferencesWindow
-from .window import BriefWindow
 from .tldr import PageManager
+from .window import BriefWindow
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
@@ -32,21 +32,11 @@ class BriefApplication(Adw.Application):
         win.present()
 
     def on_about_action(self, *args):
-        about = Adw.AboutDialog(
-            application_name="Brief",
-            application_icon="io.github.shonebinu.Brief",
-            developer_name="Shone Binu",
-            version="0.3.0",
-            developers=["Shone Binu"],
-            copyright="© 2025-present Shone Binu",
-            website="https://github.com/shonebinu/Brief",
-            issue_url="https://github.com/shonebinu/Brief/issues",
-            license_type="GTK_LICENSE_GPL_3_0",
+        about = Adw.AboutDialog.new_from_appdata(
+            "/io/github/shonebinu/Brief/appdata.xml"
         )
-
         about.add_link("Donate with Ko-Fi", "https://ko-fi.com/shonebinu")
         about.add_link("Sponsor on Github", "https://github.com/sponsors/shonebinu")
-
         about.add_legal_section(
             "Data Source",
             "© 2014—present the <a href='https://github.com/orgs/tldr-pages/people'>tldr-pages team</a> and <a href='https://github.com/tldr-pages/tldr/graphs/contributors'>contributors</a>.",

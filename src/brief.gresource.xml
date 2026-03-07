@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <gresources>
   <gresource prefix="/io/github/shonebinu/Brief">
     <file preprocess="xml-stripblanks">window.ui</file>
@@ -8,20 +8,20 @@
     <file preprocess="xml-stripblanks">preferences.ui</file>
 
 
-    <file preprocess="xml-stripblanks"
-    >icons/edit-copy-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/edit-copy-symbolic.svg</file>
 
-    <file preprocess="xml-stripblanks"
-    >icons/system-search-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/system-search-symbolic.svg</file>
 
-    <file preprocess="xml-stripblanks"
-    >icons/language-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/language-symbolic.svg</file>
 
-    <file preprocess="xml-stripblanks"
-    >icons/open-menu-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/open-menu-symbolic.svg</file>
 
 
-    <file preprocess="xml-stripblanks"
-    >icons/computer-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/computer-symbolic.svg</file>
+
+    <file
+            preprocess="xml-stripblanks"
+            alias="appdata.xml"
+        >../data/io.github.shonebinu.Brief.metainfo.xml</file>
   </gresource>
 </gresources>
