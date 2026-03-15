@@ -116,12 +116,12 @@
       "name": "tldr",
       "buildsystem": "simple",
       "build-commands": [
-        "mkdir -p ${FLATPAK_DEST}/share/tldr/",
+        "mkdir -p ${FLATPAK_DEST}/share/io.github.shonebinu.Brief/tldr-data",
         "rm pages.en",
         "mv pages pages.en",
         "python3 generate_commands_index.py",
-        "cp -r pages.* ${FLATPAK_DEST}/share/tldr/",
-        "cp commands.json ${FLATPAK_DEST}/share/tldr/"
+        "cp -r pages.* ${FLATPAK_DEST}/share/io.github.shonebinu.Brief/tldr-data",
+        "cp commands.json ${FLATPAK_DEST}/share/io.github.shonebinu.Brief/tldr-data"
       ],
       "sources": [
         {

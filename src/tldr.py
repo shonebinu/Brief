@@ -1,12 +1,13 @@
 import json
+import os
 import shutil
 import threading
 from collections import defaultdict
+from functools import lru_cache
 from pathlib import Path
+
 import langcodes
 import requests
-import os
-from functools import lru_cache
 from gi.repository import Gio, GLib
 
 
@@ -18,10 +19,10 @@ class PageManager:
     def __init__(self):
         # /app is read-only at runtime.
         # ${FLATPAK_DEST} in flatpak manifest resolves to /app
-        self.system_data_dir = Path("/app/share/tldr/")
-        self.cache_dir = Path(GLib.get_user_cache_dir()) / "brief"
-        self.local_data_dir = self.cache_dir / "tldr"
-        self.zip_path = self.cache_dir / "tldr.zip"
+        self.system_data_dir = Path("/app/share/io.github.shonebinu.Brief/tldr-data")
+        self.cache_dir = Path(GLib.get_user_cache_dir()) / "io.github.shonebinu.Brief"
+        self.local_data_dir = self.cache_dir / "tldr-data"
+        self.zip_path = self.cache_dir / "tldr-data.zip"
 
         self.settings = Gio.Settings.new("io.github.shonebinu.Brief")
 
@@ -152,7 +153,7 @@ class PageManager:
                         )
 
     def process_tldr_zip(self):
-        extract_temp = self.cache_dir / "tldr.tmp"
+        extract_temp = self.cache_dir / "tldr-data.tmp"
         shutil.rmtree(extract_temp, ignore_errors=True)
 
         shutil.unpack_archive(self.zip_path, extract_temp)
