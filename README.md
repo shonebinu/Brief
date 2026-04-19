@@ -40,3 +40,5 @@ You can clone this project and run it using [Gnome Builder](https://apps.gnome.o
 ## Credits
 
 The entirety of the data used in this project is from [tldr-pages](https://github.com/tldr-pages/tldr) and without their valuable work, this project wouldn't exist.
+
+App icon designed by [gnoman](https://gitlab.gnome.org/gnoman).

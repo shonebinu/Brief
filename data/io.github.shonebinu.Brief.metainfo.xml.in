@@ -79,7 +79,7 @@
   <!-- Applications should set a brand color in both light and dark variants like so -->
   <branding>
     <color type="primary" scheme_preference="light">#97f1aa</color>
-    <color type="primary" scheme_preference="dark">#146741</color>
+    <color type="primary" scheme_preference="dark">#05412b</color>
   </branding>
 
 
@@ -111,6 +111,14 @@
   </screenshots>
 
   <releases>
+    <release version="0.3.1" date="2026-04-19">
+        <description translate="no">
+        <p>Release 0.3.1</p>
+        <ul>
+            <li>Change to app icon designed by gnoman</li>
+        </ul>
+        </description>
+    </release>
     <release version="0.3.0" date="2026-01-06">
       <description translate="no">
         <p>Release 0.3.0</p>
