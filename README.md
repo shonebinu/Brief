@@ -1,6 +1,6 @@
 <div align=center>
 
-![Brief app screenshot](./data/screenshots/banner.png)
+![Brief app banner](./data/screenshots/banner.png)
 
 <img src="./data/icons/hicolor/scalable/apps/io.github.shonebinu.Brief.svg" alt="Brief Logo" width="128" >
 
