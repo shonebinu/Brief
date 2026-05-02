@@ -42,3 +42,9 @@ You can clone this project and run it using [Gnome Builder](https://apps.gnome.o
 The entirety of the data used in this project is from [tldr-pages](https://github.com/tldr-pages/tldr) and without their valuable work, this project wouldn't exist.
 
 App icon designed by [gnoman](https://gitlab.gnome.org/gnoman).
+
+## Other apps by me
+
+- [**Lipi**](https://github.com/shonebinu/Lipi) - Discover and install online fonts
+- [**Defuse**](https://github.com/shonebinu/Defuse) - Remove image backgrounds locally
+- [**Exchange**](https://github.com/shonebinu/Exchange) - Convert between XML and Blueprint
