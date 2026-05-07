@@ -1,73 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg height="16px" viewBox="0 0 16 16" width="16px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <filter id="a" height="100%" width="100%" x="0%" y="0%">
-        <feColorMatrix color-interpolation-filters="sRGB" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
-    </filter>
-    <mask id="b">
-        <g filter="url(#a)">
-            <rect fill-opacity="0.5" height="19.2" width="19.2" x="-1.6" y="-1.6"/>
-        </g>
-    </mask>
-    <linearGradient id="c" gradientUnits="userSpaceOnUse" x1="28" x2="116.000122" y1="65.000015" y2="65.000015">
-        <stop offset="0" stop-color="#f9f06b" stop-opacity="0"/>
-        <stop offset="0.0227273" stop-color="#8ff0a4"/>
-        <stop offset="0.0909091" stop-color="#f9f06b" stop-opacity="0"/>
-    </linearGradient>
-    <clipPath id="d">
-        <rect height="152" width="192"/>
-    </clipPath>
-    <mask id="e">
-        <g filter="url(#a)">
-            <rect fill-opacity="0.1" height="19.2" width="19.2" x="-1.6" y="-1.6"/>
-        </g>
-    </mask>
-    <linearGradient id="f" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-opacity="0"/>
-        <stop offset="0.2"/>
-        <stop offset="0.8" stop-opacity="0.949531"/>
-        <stop offset="1" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="g" gradientTransform="matrix(1.372549 0 0 1 -19.647095 -148.000122)" x1="42" x2="93" xlink:href="#f" y1="273" y2="273"/>
-    <clipPath id="h">
-        <rect height="152" width="192"/>
-    </clipPath>
-    <mask id="i">
-        <g filter="url(#a)">
-            <rect fill-opacity="0.1" height="19.2" width="19.2" x="-1.6" y="-1.6"/>
-        </g>
-    </mask>
-    <linearGradient id="j" gradientTransform="matrix(6.082763 0 0 0.164399 642.906799 -451.230835)" x1="-100.103661" x2="-87.938133" xlink:href="#f" y1="3523.322998" y2="3523.322998"/>
-    <clipPath id="k">
-        <rect height="152" width="192"/>
-    </clipPath>
-    <mask id="l">
-        <g filter="url(#a)">
-            <rect fill-opacity="0.1" height="19.2" width="19.2" x="-1.6" y="-1.6"/>
-        </g>
-    </mask>
-    <linearGradient id="m" gradientTransform="matrix(1.45098 0 0 1 -26.941162 -144.000122)" x1="42" x2="93" xlink:href="#f" y1="273" y2="273"/>
-    <clipPath id="n">
-        <rect height="152" width="192"/>
-    </clipPath>
-    <g mask="url(#b)">
-        <g clip-path="url(#d)" transform="matrix(1 0 0 1 -168 -16)">
-            <path d="m 36 24 v 96 c -4.417969 0 -8 3.582031 -8 8 v -96 c 0 -4.417969 3.582031 -8 8 -8 z m 0 0" fill="url(#c)"/>
-        </g>
-    </g>
-    <g mask="url(#e)">
-        <g clip-path="url(#h)" transform="matrix(1 0 0 1 -168 -16)">
-            <path d="m 38 124 h 70 v 2 h -70 z m 0 0" fill="url(#g)"/>
-        </g>
-    </g>
-    <g mask="url(#i)">
-        <g clip-path="url(#k)" transform="matrix(1 0 0 1 -168 -16)">
-            <path d="m 34 128 h 74 v 2 h -74 z m 0 0" fill="url(#j)"/>
-        </g>
-    </g>
-    <g mask="url(#l)">
-        <g clip-path="url(#n)" transform="matrix(1 0 0 1 -168 -16)">
-            <path d="m 48 132 h 60 v 2 h -60 z m 0 0" fill="url(#m)"/>
-        </g>
-    </g>
-    <path d="m 1 0 c -0.550781 0 -1 0.449219 -1 1 s 0.449219 1 1 1 h 1 v 4 c 0 0.550781 0.449219 1 1 1 s 1 -0.449219 1 -1 v -4 h 1 c 0.550781 0 1 -0.449219 1 -1 s -0.449219 -1 -1 -1 z m 8 0 c -0.550781 0 -1 0.449219 -1 1 v 5 c 0 0.550781 0.449219 1 1 1 h 2 c 0.550781 0 1 -0.449219 1 -1 s -0.449219 -1 -1 -1 h -1 v -4 c 0 -0.550781 -0.449219 -1 -1 -1 z m 6 1 c -0.550781 0 -1 0.449219 -1 1 s 0.449219 1 1 1 s 1 -0.449219 1 -1 s -0.449219 -1 -1 -1 z m 0 3 c -0.550781 0 -1 0.449219 -1 1 s 0.449219 1 1 1 c 0 0.199219 -0.007812 0.210938 -0.121094 0.355469 c -0.113281 0.144531 -0.367187 0.382812 -0.746094 0.773437 c -0.195312 0.199219 -0.191406 0.515625 0.007813 0.707032 c 0.195313 0.191406 0.511719 0.1875 0.707031 -0.007813 c 0.363282 -0.371094 0.613282 -0.59375 0.820313 -0.859375 c 0.207031 -0.261719 0.332031 -0.609375 0.332031 -0.96875 v -1.054688 c 0 -0.042968 -0.007812 -0.089843 -0.019531 -0.132812 c -0.085938 -0.46875 -0.5 -0.8125 -0.980469 -0.8125 z m -13 5 c -0.550781 0 -1 0.449219 -1 1 v 5 c 0 0.550781 0.449219 1 1 1 h 2 c 1.644531 0 3 -1.355469 3 -3 v -1 c 0 -1.644531 -1.355469 -3 -3 -3 z m 8 0 c -0.550781 0 -1 0.449219 -1 1 v 5 c 0 0.550781 0.449219 1 1 1 s 1 -0.449219 1 -1 v -1 h 0.585938 l 1.707031 1.707031 c 0.390625 0.390625 1.023437 0.390625 1.414062 0 s 0.390625 -1.023437 0 -1.414062 l -0.757812 -0.761719 c 0.632812 -0.453125 1.050781 -1.199219 1.050781 -2.03125 v -0.003906 c 0 -1.367188 -1.128906 -2.496094 -2.5 -2.496094 z m -7 2 h 1 c 0.5625 0 1 0.4375 1 1 v 1 c 0 0.5625 -0.4375 1 -1 1 h -1 z m 8 0 h 1.5 c 0.289062 0 0.5 0.210938 0.5 0.5 v 0.003906 c 0 0.285156 -0.210938 0.496094 -0.5 0.496094 h -1.5 z m 0 0"/>
+<svg width="16px" height="16px" version="1.1" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <filter id="a" x="0" y="0" width="1" height="1">
+   <feColorMatrix color-interpolation-filters="sRGB" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+  </filter>
+  <filter id="b" x="0" y="0" width="1" height="1">
+   <feColorMatrix color-interpolation-filters="sRGB" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 -1 1"/>
+  </filter>
+  <mask id="d">
+   <g filter="url(#a)">
+    <rect x="-1.6" y="-1.6" width="19.2" height="19.2" fill-opacity=".1"/>
+   </g>
+  </mask>
+  <clipPath id="g">
+   <rect width="192" height="152"/>
+  </clipPath>
+  <mask id="h">
+   <g filter="url(#a)">
+    <rect x="-1.6" y="-1.6" width="19.2" height="19.2" fill-opacity=".1"/>
+   </g>
+  </mask>
+  <clipPath id="j">
+   <rect width="192" height="152"/>
+  </clipPath>
+  <mask id="k">
+   <g filter="url(#a)">
+    <rect x="-1.6" y="-1.6" width="19.2" height="19.2" fill-opacity=".1"/>
+   </g>
+  </mask>
+  <clipPath id="m">
+   <rect width="192" height="152"/>
+  </clipPath>
+  <mask id="n">
+   <g filter="url(#a)">
+    <rect x="-1.6" y="-1.6" width="19.2" height="19.2" fill-opacity=".1"/>
+   </g>
+  </mask>
+  <clipPath id="p">
+   <rect width="192" height="152"/>
+  </clipPath>
+  <mask id="q">
+   <g filter="url(#a)">
+    <rect x="-1.6" y="-1.6" width="19.2" height="19.2" fill-opacity=".5"/>
+   </g>
+  </mask>
+  <clipPath id="s">
+   <rect width="192" height="152"/>
+  </clipPath>
+  <mask id="t">
+   <g filter="url(#a)">
+    <rect x="-1.6" y="-1.6" width="19.2" height="19.2" fill-opacity=".1"/>
+   </g>
+  </mask>
+  <clipPath id="u">
+   <rect width="192" height="152"/>
+  </clipPath>
+  <mask id="v">
+   <g filter="url(#a)">
+    <rect x="-1.6" y="-1.6" width="19.2" height="19.2" fill-opacity=".1"/>
+   </g>
+  </mask>
+  <clipPath id="w">
+   <rect width="192" height="152"/>
+  </clipPath>
+  <mask id="x">
+   <g filter="url(#a)">
+    <rect x="-1.6" y="-1.6" width="19.2" height="19.2" fill-opacity=".1"/>
+   </g>
+  </mask>
+  <clipPath id="z">
+   <rect width="192" height="152"/>
+  </clipPath>
+  <mask id="A">
+   <g filter="url(#a)">
+    <rect x="-1.6" y="-1.6" width="19.2" height="19.2" fill-opacity=".1"/>
+   </g>
+  </mask>
+  <clipPath id="B">
+   <rect width="192" height="152"/>
+  </clipPath>
+  <mask id="C">
+   <g filter="url(#a)">
+    <rect x="-1.6" y="-1.6" width="19.2" height="19.2" fill-opacity=".5"/>
+   </g>
+  </mask>
+  <clipPath id="E">
+   <rect width="192" height="152"/>
+  </clipPath>
+  <g id="F">
+   <rect width="19.2" height="19.2" fill="none"/>
+   <rect width="19.2" height="19.2" fill="#fff"/>
+  </g>
+  <mask id="G">
+   <use xlink:href="#F"/>
+  </mask>
+  <mask id="H">
+   <use filter="url(#b)" xlink:href="#F"/>
+  </mask>
+  <g id="J" mask="url(#H)">
+   <g transform="translate(1.6 1.6)">
+    <g mask="url(#d)"></g>
+    <g mask="url(#h)"></g>
+    <g mask="url(#k)"></g>
+    <g mask="url(#n)"></g>
+    <g mask="url(#q)"></g>
+    <g mask="url(#t)"></g>
+    <g mask="url(#v)"></g>
+    <g mask="url(#x)"></g>
+    <g mask="url(#A)"></g>
+    <g mask="url(#C)"></g>
+   </g>
+  </g>
+ </defs>
+ <path d="m1 0a1 1 0 0 0-1 1 1 1 0 0 0 1 1h1v4a1 1 0 0 0 1 1 1 1 0 0 0 1-1v-4h1a1 1 0 0 0 1-1 1 1 0 0 0-1-1h-2zm8 0a1 1 0 0 0-1 1v5a1.0001 1.0001 0 0 0 1 1h2a1 1 0 0 0 1-1 1 1 0 0 0-1-1h-1v-4a1 1 0 0 0-1-1zm6 1a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1zm0 3a1 1 0 0 0-1 1 1 1 0 0 0 1 1c0 0.1993-7e-3 0.20918-0.12109 0.35547-0.11421 0.14629-0.36739 0.38432-0.74805 0.77344a0.5 0.5 0 0 0 8e-3 0.70703 0.5 0.5 0 0 0 0.70703-8e-3c0.36324-0.37129 0.61685-0.59429 0.82227-0.85742 0.20504-0.26277 0.33184-0.6116 0.33184-0.97052v-1.0547a0.5 0.5 0 0 0-0.0176-0.13086 1 1 0 0 0-0.9824-0.81445zm-13 5a1.0001 1.0001 0 0 0-1 1v5a1.0001 1.0001 0 0 0 1 1h2c1.645 0 3-1.355 3-3v-1c0-1.645-1.355-3-3-3zm8 0a1.0001 1.0001 0 0 0-1 1v5a1 1 0 0 0 1 1 1 1 0 0 0 1-1v-1h0.58594l1.707 1.707a1 1 0 0 0 1.4141 0 1 1 0 0 0 0-1.4141l-0.75976-0.75977c0.63511-0.45528 1.0527-1.1993 1.0527-2.0312v-4e-3c0-1.3679-1.13-2.498-2.498-2.498zm-7 2h1c0.56413 0 1 0.43587 1 1v1c0 0.56413-0.43587 1-1 1h-1zm8 0h1.502c0.2872 0 0.49805 0.21085 0.49805 0.49805v4e-3c0 0.287-0.21085 0.49795-0.49805 0.49795h-1.502z" stop-color="#000000" stroke-dashoffset="26.485" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
