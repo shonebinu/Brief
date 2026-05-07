@@ -6,3 +6,10 @@ data/io.github.shonebinu.Brief.gschema.xml
 src/main.py
 src/window.py
 src/window.blp
+src/preferences.py
+src/preferences.blp
+src/renderer.py
+src/renderer.blp
+src/shortcuts-dialog.blp
+src/sidebar.blp
+src/sidebar.py

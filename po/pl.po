@@ -1,0 +1,199 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the brief package.
+#
+# SPDX-FileCopyrightText: 2026 Marcel Mrówka <micro.mail88@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: brief\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-25 12:29+0100\n"
+"PO-Revision-Date: 2026-01-25 12:33+0100\n"
+"Last-Translator: Marcel Mrówka <micro.mail88@gmail.com>\n"
+"Language-Team: Polish <>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 |"
+"| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 25.08.2\n"
+
+#: data/io.github.shonebinu.Brief.desktop.in:2
+#: data/io.github.shonebinu.Brief.metainfo.xml.in:7 src/window.blp:5
+#: src/sidebar.blp:6
+msgid "Brief"
+msgstr "Brief"
+
+#: data/io.github.shonebinu.Brief.desktop.in:8
+msgid ""
+"GTK;tldr;man;manual;cheatsheet;command;terminal;cli;help;documentation;referen"
+"ce;"
+msgstr ""
+"GTK;tldr;man;manual;cheatsheet;command;terminal;cli;help;documentation;referen"
+"ce;zdnc;zbytdługienieczytam;zbytdługienieprzeczytałem;zbytdługienieprzeczytała"
+"m;instrukcja;podręcznik;ściąga;komenda;komendy;terminal;konsola;pomoc;dokument"
+"acja;wierszpoleceń;"
+
+#: data/io.github.shonebinu.Brief.metainfo.xml.in:8
+msgid "Browse command-line cheatsheets"
+msgstr "Przeglądaj ściągi do wiersza poleceń"
+
+#: data/io.github.shonebinu.Brief.metainfo.xml.in:10
+msgid ""
+"Brief is an app for browsing command-line cheatsheets. It lets you search "
+"through thousands of command-line tools across multiple platforms and "
+"languages, providing simplified help pages."
+msgstr ""
+"Brief to aplikacja do przeglądania ściąg do wiersza poleceń. Pozwala ci na "
+"wyszukiwanie tysiąca narzędzi wiersza poleceń na kilku platformach oraz w "
+"kilku językach, dostarczając uproszczone strony pomocy."
+
+#: data/io.github.shonebinu.Brief.metainfo.xml.in:13
+msgid "Features:"
+msgstr "Funkcje:"
+
+#: data/io.github.shonebinu.Brief.metainfo.xml.in:15
+msgid "Works completely offline."
+msgstr "Działa całkowicie offline."
+
+#: data/io.github.shonebinu.Brief.metainfo.xml.in:16
+msgid "Filter platform specific commands (Linux, Windows, Android, etc.)."
+msgstr ""
+"Filtruje komendy na konkretne platformy (Linux, Windows, Android, itd.)."
+
+#: data/io.github.shonebinu.Brief.metainfo.xml.in:17
+msgid "View command help pages in multiple available languages."
+msgstr "Przeglądaj strony pomocy komend w wielu językach."
+
+#: data/io.github.shonebinu.Brief.metainfo.xml.in:18
+msgid ""
+"Change the command argument format between long (`ls --all`) or short (`ls "
+"-a`)."
+msgstr ""
+"Zmieniaj format argumentacji komenty pomiędzy długim (`ls --all`) lub "
+"krótkim (`ls -a`)."
+
+#: data/io.github.shonebinu.Brief.metainfo.xml.in:19
+msgid "Lets you update the cache within the app to download the latest data."
+msgstr ""
+"Pozwala ci zaktualizować pamięć podręczną z poziomu aplikacji, aby pobrać "
+"najnowsze dane."
+
+#: data/io.github.shonebinu.Brief.metainfo.xml.in:24
+msgid "Shone Binu"
+msgstr "Shone Binu"
+
+#: data/io.github.shonebinu.Brief.metainfo.xml.in:72
+msgid "Brief app"
+msgstr "Aplikacja Brief"
+
+#: data/io.github.shonebinu.Brief.gschema.xml:7 src/preferences.blp:18
+msgid "Command Format"
+msgstr "Format komend"
+
+#: data/io.github.shonebinu.Brief.gschema.xml:8
+msgid "Long or short command arguments."
+msgstr "Długie czy krótkie argumenty komend."
+
+#: data/io.github.shonebinu.Brief.gschema.xml:13
+msgid "Active Languages"
+msgstr "Aktywne języki"
+
+#: data/io.github.shonebinu.Brief.gschema.xml:14
+msgid "List of enabled language codes."
+msgstr "Lista włączonych języków."
+
+#: data/io.github.shonebinu.Brief.gschema.xml:19
+msgid "Active Platforms"
+msgstr "Aktywne platformy"
+
+#: data/io.github.shonebinu.Brief.gschema.xml:20
+msgid "List of enabled operating systems."
+msgstr "Lista włączonych systemów operacyjnych."
+
+#: src/window.blp:19
+msgid "Welcome"
+msgstr "Witaj"
+
+#: src/window.blp:32
+msgid "Search Brief"
+msgstr "Wyszukaj"
+
+#: src/window.blp:33
+msgid ""
+"Try searching for commands like <span font_family='Monospace'>ls</span> or "
+"<span font_family='Monospace'>cd</span>"
+msgstr ""
+"Spróbuj wyszukać komendy takie jak <span font_family='Monospace'>ls</span> "
+"czy<span font_family='Monospace'>cd</span>"
+
+#: src/preferences.blp:5
+msgid "Preferences"
+msgstr "Preferencje"
+
+#: src/preferences.blp:12
+msgid "General"
+msgstr "Ogólne"
+
+#: src/preferences.blp:15
+msgid "Content"
+msgstr "Zawartość"
+
+#: src/preferences.blp:19
+msgid "Display style for arguments"
+msgstr "Styl wyświetlania dla argumentów"
+
+#: src/preferences.blp:23
+msgid "Languages"
+msgstr "Języki"
+
+#: src/preferences.blp:24
+msgid "Select languages"
+msgstr "Wybierz języki"
+
+#: src/preferences.blp:28
+msgid "Platforms"
+msgstr "Platformy"
+
+#: src/preferences.blp:29
+msgid "Select operating systems"
+msgstr "Wybierz systemy operacyjne"
+
+#: src/shortcuts-dialog.blp:6
+msgid "Shortcuts"
+msgstr "Skróty"
+
+#: src/shortcuts-dialog.blp:9
+msgctxt "shortcut window"
+msgid "Search"
+msgstr "Wyszukaj"
+
+#: src/shortcuts-dialog.blp:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Pokaż skróty"
+
+#: src/shortcuts-dialog.blp:19
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Wyjdź"
+
+#: src/sidebar.blp:25
+msgid "Search commands..."
+msgstr "Wyszukuj komendy..."
+
+#: src/sidebar.blp:161
+msgid "_Update Cache"
+msgstr "Zakt_ualizuj pamięć podręczną"
+
+#: src/sidebar.blp:168
+msgid "_Preferences"
+msgstr "_Preferencje"
+
+#: src/sidebar.blp:174
+msgid "_Keyboard Shortcuts"
+msgstr "Skróty _klawiszowe"
+
+#: src/sidebar.blp:179
+msgid "_About Brief"
+msgstr "O _aplikacji Brief"
