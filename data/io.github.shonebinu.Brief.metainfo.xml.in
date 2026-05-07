@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <id>io.github.shonebinu.Brief</id>
   <metadata_license>CC0-1.0</metadata_license>
@@ -7,21 +7,17 @@
   <name>Brief</name>
   <summary>Browse command-line cheatsheets</summary>
   <description>
-    <p
-        >Brief is an app for browsing command-line cheatsheets. It lets you search through thousands
+    <p>Brief is an app for browsing command-line cheatsheets. It lets you search through thousands
       of command-line tools across multiple platforms and languages, providing simplified help
       pages.</p>
     <p>Features:</p>
     <ul>
       <li>Works completely offline.</li>
       <li>Fuzzy search through the available commands.</li>
-      <li
-            >Filter platform specific commands (Linux, Windows, Android, etc.).</li>
+      <li>Filter platform specific commands (Linux, Windows, Android, etc.).</li>
       <li>View command help pages in multiple available languages.</li>
-      <li
-            >Change the command argument format between long (`ls --all`) or short (`ls -a`).</li>
-      <li
-            >Lets you update the cache within the app to download the latest data.</li>
+      <li>Change the command argument format between long (`ls --all`) or short (`ls -a`).</li>
+      <li>Lets you update the cache within the app to download the latest data.</li>
     </ul>
   </description>
 
@@ -111,13 +107,22 @@
   </screenshots>
 
   <releases>
+    <release version="0.3.2" date="2026-05-07">
+      <description translate="no">
+        <p>Release 0.3.2</p>
+        <ul>
+          <li>Fix app icon black background issue in KDE</li>
+          <li>Update deps</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.3.1" date="2026-04-19">
-        <description translate="no">
+      <description translate="no">
         <p>Release 0.3.1</p>
         <ul>
-            <li>Change to app icon designed by gnoman</li>
+          <li>Change to app icon designed by gnoman</li>
         </ul>
-        </description>
+      </description>
     </release>
     <release version="0.3.0" date="2026-01-06">
       <description translate="no">
